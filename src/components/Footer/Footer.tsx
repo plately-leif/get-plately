@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
@@ -7,11 +8,13 @@ const Footer: React.FC = () => {
         {/* Left: Logo & Description */}
         <div className="flex flex-col gap-4 max-w-xs">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
-              {/* TODO: Replace with actual logo SVG */}
-              <span className="text-white font-bold text-lg">P</span>
-            </div>
-            <span className="font-sans text-xl font-semibold text-white">Plately</span>
+            <Image
+              src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/platelyLogo_LightText.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9wbGF0ZWx5TG9nb19MaWdodFRleHQuc3ZnIiwiaWF0IjoxNzQ4NjQwMTYxLCJleHAiOjMzMjU0NDAxNjF9.fH2ROf7y4d7GPOHdXHvGRG62O_xTGjL_Anr5c3zFNyc"
+              alt="Plately Logo Light"
+              height={32}
+              width={120}
+              className="h-8 w-auto"
+            />
           </div>
           <span className="text-sm text-white/80">AI-powered social media content for restaurants.</span>
         </div>
@@ -19,7 +22,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-8 md:gap-16">
           <div className="flex flex-col gap-2 min-w-[100px]">
             <span className="font-semibold text-base">Product</span>
-            <a href="#about" className="text-sm text-white/80 hover:text-white">About</a>
+            <a href="#login" className="text-sm text-white/80 hover:text-white">Login</a>
           </div>
           <div className="flex flex-col gap-2 min-w-[100px]">
             <span className="font-semibold text-base">Company</span>

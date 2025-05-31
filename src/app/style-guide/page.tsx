@@ -52,7 +52,7 @@ export default function StyleGuide() {
         <div className="flex gap-4 flex-wrap items-center">
           <button className="bg-accent text-white font-semibold rounded-md px-6 py-3 hover:bg-primary transition">Accent Button</button>
           <button className="bg-primary text-white font-semibold rounded-md px-6 py-3 hover:bg-accent transition">Primary Button</button>
-          <button className="border border-gray-300 text-primary font-semibold rounded-md px-6 py-3 hover:bg-gray-100 transition">Outlined Button</button>
+          <button className="border-[2px] border-primary text-primary font-semibold rounded-md px-6 py-3 hover:bg-gray-100 transition">Outlined Button</button>
         </div>
       </section>
 
