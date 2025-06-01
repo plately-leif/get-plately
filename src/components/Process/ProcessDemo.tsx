@@ -6,86 +6,107 @@ const FOOD_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sig
 
 const ProcessDemo: React.FC = () => {
   return (
-    <section className="w-full flex flex-col items-center px-4 md:px-10 py-16 md:py-20 bg-[#F9FAFB] gap-12 md:gap-16">
+    <section className="w-full flex flex-col items-center px-4 md:px-10 py-10 md:py-14 bg-[#F9FAFB] gap-8 md:gap-10">
       {/* Header */}
-      <div className="flex flex-col items-center gap-2 max-w-2xl text-center mb-8">
-        <h2 className="text-[2.25rem] md:text-[2.5rem] font-bold text-[#111827] leading-tight">See Plately in action</h2>
-        <p className="text-lg md:text-xl font-bold text-[#6B7280]">From your basic photos to stunning social media posts</p>
+      <div className="flex flex-col items-center gap-1 max-w-2xl text-center mb-4">
+        <h2 className="text-[2rem] md:text-[2.25rem] font-bold text-[#111827] leading-tight">See Plately in action</h2>
+        <p className="text-base md:text-lg font-bold text-[#6B7280]">From your basic photos to stunning social media posts</p>
       </div>
-      {/* BEFORE Section */}
-      <div className="w-full max-w-5xl flex flex-col items-center gap-6">
-        <div className="flex items-center gap-3 mb-2">
-          <span className="text-[1.25rem] font-bold text-[#EF4444]">BEFORE:</span>
-          <span className="text-lg md:text-xl font-semibold text-[#111827]">Your Quick Photo Snaps</span>
+      {/* HEADER - Screenshot style */}
+      <div className="flex flex-col items-center w-full max-w-[1200px] mx-auto mb-8">
+        <div className="flex flex-row items-center justify-center gap-3 mb-2">
+          <span className="text-[#EF4444] font-bold text-xl md:text-2xl uppercase tracking-wide">BEFORE:</span>
+          <span className="text-[#111827] font-bold text-xl md:text-2xl">Your Quick Photo Snaps</span>
         </div>
-        <p className="text-base md:text-lg font-medium text-[#6B7280] text-center max-w-xl">Just upload one photo of your restaurant and one of your food. Plately AI takes care of the rest.</p>
-        {/* Photo Inputs Row */}
-        <div className="flex flex-row items-center justify-center gap-4 md:gap-8 w-full">
-          {/* Restaurant Photo */}
-          <div className="flex flex-col items-center gap-3">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-6 h-6 bg-[#0B3954] rounded-md flex items-center justify-center">
-                <span className="text-white text-xs font-bold">1</span>
-              </div>
-              <span className="text-base font-semibold text-[#111827]">Restaurant Photo</span>
-            </div>
-            <div className="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px] lg:w-[350px] lg:h-[350px] bg-[#C4C4C4] border-2 border-[#E5E7EB] rounded-xl shadow-md flex items-center justify-center overflow-hidden">
-              <Image
-                src={RESTAURANT_IMG}
-                alt="Restaurant interior photo"
-                width={350}
-                height={350}
-                className="object-cover w-full h-full"
-                sizes="(max-width: 640px) 120px, (max-width: 768px) 180px, (max-width: 1024px) 220px, 350px"
-                priority
-              />
-            </div>
+        <p className="text-[#6B7280] text-base md:text-lg text-center max-w-2xl">Just upload one photo of your restaurant and one of your food. Plately AI takes care of the rest.</p>
+      </div>
+      {/* FIVE COLUMN ROW - No card, larger images */}
+      <div className="w-full max-w-[1200px] flex flex-row items-center justify-center gap-8 mb-10">
+        {/* 1. Step 1: Number, Label, Description */}
+        <div className="flex flex-col items-end text-right gap-2 min-w-[170px]">
+          <span className="w-9 h-9 bg-blue-800 rounded-full flex items-center justify-center text-white text-base font-bold mb-1">1</span>
+          <span className="font-bold text-base text-[#111827] mb-1">Restaurant Photo</span>
+          <span className="text-sm text-[#6B7280] max-w-[160px]">Upload a photo of your restaurant interior or exterior. This sets the vibe for your brand!</span>
+        </div>
+        {/* 2. Restaurant Image with label above */}
+        <div className="flex flex-col items-center gap-2">
+          <span className="font-bold text-base text-[#111827] mb-1">Restaurant Photo</span>
+          <div className="w-[312px] h-[219px] bg-gray-200 border-2 border-[#E5E7EB] rounded-xl flex items-center justify-center overflow-hidden relative">
+            <Image
+              src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/Restaurant-interior.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9SZXN0YXVyYW50LWludGVyaW9yLmpwZyIsImlhdCI6MTc0ODgwMTU1MiwiZXhwIjoxNzgwMzM3NTUyfQ.L-5carpWOdA-M7uCbHVEo_O8NrtpLPdS7Hq-PUYRvkw"
+              alt="Restaurant interior"
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 640px) 100vw, 312px"
+              priority
+            />
           </div>
-          {/* Plus Sign */}
-          <div className="w-10 h-10 bg-[#E8E9E9] rounded-full flex items-center justify-center mx-2">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9CA3AF" strokeWidth="2">
+        </div>
+        {/* 3. Plus Icon */}
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center border border-gray-200">
+            <svg width="28" height="28" viewBox="0 0 20 20" fill="none" stroke="#6B7280" strokeWidth="2">
               <line x1="10" y1="4" x2="10" y2="16" />
               <line x1="4" y1="10" x2="16" y2="10" />
             </svg>
           </div>
-          {/* Food Photo */}
-          <div className="flex flex-col items-center gap-3">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-6 h-6 bg-[#0B3954] rounded-md flex items-center justify-center">
-                <span className="text-white text-xs font-bold">2</span>
-              </div>
-              <span className="text-base font-semibold text-[#111827]">Food Photo</span>
-            </div>
-            <div className="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px] lg:w-[350px] lg:h-[350px] bg-[#C4C4C4] border-2 border-[#E5E7EB] rounded-xl shadow-md flex items-center justify-center overflow-hidden">
-              <Image
-                src={FOOD_IMG}
-                alt="Burger food photo"
-                width={350}
-                height={350}
-                className="object-cover w-full h-full"
-                sizes="(max-width: 640px) 120px, (max-width: 768px) 180px, (max-width: 1024px) 220px, 350px"
-                priority
-              />
-            </div>
+        </div>
+        {/* 4. Food Image with label above */}
+        <div className="flex flex-col items-center gap-2">
+          <span className="font-bold text-base text-[#111827] mb-1">Food Photo</span>
+          <div className="w-[312px] h-[219px] bg-gray-200 border-2 border-[#E5E7EB] rounded-xl flex items-center justify-center overflow-hidden relative">
+            <Image
+              src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/burger.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9idXJnZXIuanBlZyIsImlhdCI6MTc0ODgwMTU3NywiZXhwIjoxNzgwMzM3NTc3fQ.P6Nr1b29C52sq1QPDrhirW7gtWXBymIYVdM3Bl8ugEo"
+              alt="Burger food photo"
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 640px) 100vw, 312px"
+              priority
+            />
           </div>
         </div>
-      </div>
-      {/* AI Divider (Pill Only) */}
-      <div className="flex justify-center my-4">
-        <div className="flex items-center gap-2 bg-gradient-to-b from-purple-500 to-blue-500 px-4 py-2 rounded-full shadow" style={{background: 'linear-gradient(180deg, #8B5CF6 0%, #3B82F6 100%)'}}>
-          <span className="text-white font-semibold text-sm">Plately AI Transforms</span>
-          <span role="img" aria-label="sparkles">✨</span>
+        {/* 5. Step 2: Number, Label, Description */}
+        <div className="flex flex-col items-start text-left gap-2 min-w-[170px]">
+          <span className="w-9 h-9 bg-blue-800 rounded-full flex items-center justify-center text-white text-base font-bold mb-1">2</span>
+          <span className="font-bold text-base text-[#111827] mb-1">Food Photo</span>
+          <span className="text-sm text-[#6B7280] max-w-[160px]">Upload a photo of your signature dish or best-seller. This is what will make mouths water!</span>
         </div>
       </div>
-      {/* AFTER Section */}
-      <div className="flex flex-col items-center gap-3 mb-2 mt-8">
-        <span className="text-[1.25rem] font-bold text-[#16A34A]">AFTER:</span>
-        <span className="text-lg md:text-xl font-semibold text-[#111827]">Get Scroll-Stopping Results</span>
+      {/* Mobile Descriptions Below Images */}
+      <div className="flex flex-col gap-3 w-full max-w-5xl md:hidden mb-2">
+        <span className="flex items-center gap-3 text-base text-[#6B7280] justify-center leading-snug">
+          <span className="w-8 h-8 bg-[#0B3954] rounded-md flex items-center justify-center text-white text-base font-bold">1</span>
+          Upload a photo of your restaurant interior or exterior. This sets the vibe for your brand!
+        </span>
+        <span className="flex items-center gap-3 text-base text-[#6B7280] justify-center leading-snug">
+          <span className="w-8 h-8 bg-[#0B3954] rounded-md flex items-center justify-center text-white text-base font-bold">2</span>
+          Upload a photo of your signature dish or best-seller. This is what will make mouths water!
+        </span>
       </div>
-      <p className="text-base md:text-lg font-medium text-[#6B7280] text-center max-w-xl mb-6">Receive a variety of styles, perfect for Instagram, Facebook, or any social feed – all designed to make your audience hungry for more.</p>
-      <div className="flex flex-col md:flex-row gap-6 w-full justify-center items-start">
+      {/* AI Divider (Pill + Arrow) */}
+      <div className="flex flex-col items-center gap-1 my-2 w-full max-w-[1200px] mx-auto">
+        {/* Horizontal divider with pill cutout */}
+        <div className="relative w-full flex items-center justify-center" style={{ minHeight: '40px' }}>
+          {/* Divider line left */}
+          <div className="absolute left-0 right-1/2 flex items-center pr-[120px]">
+            <div className="w-full border-t" style={{ borderColor: '#D1D5DB', borderTopWidth: '1px' }} />
+          </div>
+          {/* Pill */}
+          <div className="relative z-10 flex items-center gap-2 bg-gradient-to-b from-purple-500 to-blue-500 px-4 py-2 rounded-full shadow mx-4" style={{background: 'linear-gradient(180deg, #8B5CF6 0%, #3B82F6 100%)'}}>
+            <span className="text-white font-semibold text-sm">Plately AI Transforms</span>
+            <span role="img" aria-label="sparkles">✨</span>
+          </div>
+          {/* Divider line right */}
+          <div className="absolute right-0 left-1/2 flex items-center pl-[120px]">
+            <div className="w-full border-t" style={{ borderColor: '#D1D5DB', borderTopWidth: '1px' }} />
+          </div>
+        </div>
+        <svg width="24" height="24" fill="none" stroke="#8B5CF6" strokeWidth="2" className="mt-1"><path d="M12 4v16M12 20l-4-4M12 20l4-4"/></svg>
+      </div>
+      {/* AFTER Row */}
+      <div className="w-full flex flex-row gap-4 md:gap-6 justify-center items-end overflow-x-auto pb-2" style={{scrollbarWidth: 'thin'}}>
         {/* Instagram Card */}
-        <div className="bg-white border border-[#E5E7EB] shadow-lg rounded-2xl flex flex-col w-full max-w-[363px] mx-auto">
+        <div className="bg-white border border-[#E5E7EB] shadow-lg rounded-2xl flex flex-col w-[320px] max-w-[363px] mx-auto min-w-[280px]">
           {/* Header */}
           <div className="flex items-center gap-3 px-4 py-4 border-b border-[#E5E7EB]">
             <div className="w-9 h-9 bg-gradient-to-tr from-pink-500 via-yellow-400 to-purple-500 rounded-full flex items-center justify-center">
@@ -125,7 +146,7 @@ const ProcessDemo: React.FC = () => {
           </div>
         </div>
         {/* Facebook Card */}
-        <div className="bg-white border border-[#E5E7EB] shadow-lg rounded-2xl flex flex-col w-full max-w-[363px] mx-auto">
+        <div className="bg-white border border-[#E5E7EB] shadow-lg rounded-2xl flex flex-col w-[320px] max-w-[363px] mx-auto min-w-[280px]">
           {/* Header */}
           <div className="flex items-center gap-3 px-4 py-4 border-b border-[#E5E7EB]">
             <div className="w-9 h-9 bg-[#1877F3] rounded-full flex items-center justify-center">
@@ -172,7 +193,7 @@ const ProcessDemo: React.FC = () => {
           </div>
         </div>
         {/* TikTok Card */}
-        <div className="bg-black rounded-2xl flex flex-col w-full max-w-[363px] mx-auto text-white relative overflow-hidden" style={{height: 'auto'}}>
+        <div className="bg-black rounded-2xl flex flex-col w-[320px] max-w-[363px] mx-auto min-w-[280px] text-white relative overflow-hidden" style={{height: 'auto'}}>
           {/* TikTok Image/Video */}
           <div className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] relative overflow-hidden">
             <Image
