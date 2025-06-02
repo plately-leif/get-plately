@@ -7,75 +7,71 @@ const benefits = [
   {
     emoji: "✨",
     icon: (
-      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2L14.4 8.8L21.6 8.8L15.6 13.2L18 20L12 15.6L6 20L8.4 13.2L2.4 8.8L9.6 8.8L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
       </svg>
     ),
     title: "Instant Polish",
-    desc: "Effortlessly transform everyday photos into elegant, professional visuals.",
+    desc: "Turn your everyday food photos into stunning, professional posts with just a few clicks.",
   },
   {
     emoji: "⏱️",
     icon: (
-      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-        <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 6v6l3.644 1.822"/>
+        <path d="M16 19h6"/>
+        <path d="M19 16v6"/>
+        <path d="M21.92 13.267a10 10 0 1 0-8.653 8.653"/>
       </svg>
     ),
     title: "Save Hours",
-    desc: "Automate design tasks that used to take forever, freeing up your valuable time.",
+    desc: "Stop wasting time on design. What used to take hours now takes minutes, so you can get back to your kitchen.",
   },
   {
     emoji: "💰",
     icon: (
-      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20Z" fill="currentColor" />
-        <path d="M12 17C12.5523 17 13 16.5523 13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17Z" fill="currentColor" />
-        <path d="M13 7H11V14H13V7Z" fill="currentColor" />
+      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z"/>
+        <path d="M16 10h.01"/>
+        <path d="M2 8v1a2 2 0 0 0 2 2h1"/>
       </svg>
     ),
     title: "Budget-Friendly",
-    desc: "Get boutique-quality aesthetics without the high costs.",
+    desc: "Why pay a designer? Get the same high-end look for a fraction of the cost.",
   },
   {
     emoji: "🎨",
     icon: (
-      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12Z" stroke="currentColor" strokeWidth="2" />
-        <path d="M8 12C8 13.1046 7.10457 14 6 14C4.89543 14 4 13.1046 4 12C4 10.8954 4.89543 10 6 10C7.10457 10 8 10.8954 8 12Z" fill="currentColor" />
-        <path d="M14 6C14 7.10457 13.1046 8 12 8C10.8954 8 10 7.10457 10 6C10 4.89543 10.8954 4 12 4C13.1046 4 14 4.89543 14 6Z" fill="currentColor" />
-        <path d="M20 12C20 13.1046 19.1046 14 18 14C16.8954 14 16 13.1046 16 12C16 10.8954 16.8954 10 18 10C19.1046 10 20 10.8954 20 12Z" fill="currentColor" />
-        <path d="M14 18C14 19.1046 13.1046 20 12 20C10.8954 20 10 19.1046 10 18C10 16.8954 10.8954 16 12 16C13.1046 16 14 16.8954 14 18Z" fill="currentColor" />
+      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+        <path d="m9 12 2 2 4-4"/>
       </svg>
     ),
     title: "Consistent Brand",
-    desc: "Apply your unique style across all your posts, ensuring your feed always looks cohesive and on-point.",
+    desc: "Keep your restaurant's personality shining through every post. Your feed will look professionally curated, not random.",
   },
   {
     emoji: "🚀",
     icon: (
-      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4.5 16.5C3 17.5 2 21 2 21C2 21 5.5 20 6.5 18.5C7.5 17 6.5 15 5 15C3.5 15 3 15.5 4.5 16.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M12 15L9 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M20 4L21 3L18 2L17 5L18 6L20 4ZM20 4L15 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M15 9C12.2091 9 10 11.2091 10 14C10 16.7909 12.2091 19 15 19C17.7909 19 20 16.7909 20 14C20 11.2091 17.7909 9 15 9Z" stroke="currentColor" strokeWidth="2" />
+      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="13 19 22 12 13 5 13 19"/>
+        <polygon points="2 19 11 12 2 5 2 19"/>
       </svg>
     ),
     title: "Designed for Speed",
-    desc: "Super fast content creation so you can focus on your business.",
+    desc: "Create posts in seconds, not hours. We know you've got a restaurant to run.",
   },
   {
     emoji: "🤤",
     icon: (
-      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8.5 14C8.5 14 9.5 16 12 16C14.5 16 15.5 14 15.5 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M7 9H7.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M17 9H17.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" />
+      <svg className="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+        <path d="M7 2v20"/>
+        <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
       </svg>
     ),
     title: "Appetite Appeal",
-    desc: "Create content that makes people hungry and want to visit and order.",
+    desc: "Make your food look so good people can't help but stop scrolling and place an order.",
   },
 ];
 
