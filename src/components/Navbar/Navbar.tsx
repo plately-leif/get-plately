@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
       {/* Right: Links (Desktop) */}
       <div className="hidden md:flex items-center gap-4">
         <a href="#blog" className="text-gray-600 font-medium hover:text-gray-900 transition-colors">Blog</a>
-        <a href="#waitlist" className="bg-primary text-white font-semibold rounded-md px-5 py-2 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition">Join Waitlist</a>
+        <a href="#waitlist" className="bg-accent text-white font-semibold rounded-md px-5 py-2 hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 transition">Join Waitlist</a>
       </div>
       {/* Hamburger (Mobile) */}
       <button
@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
           </a>
           <a
             href="#waitlist"
-            className="block w-full text-left px-6 py-3 bg-primary text-white font-semibold rounded-b-lg hover:bg-primary-dark transition"
+            className="block w-full text-left px-6 py-3 bg-accent text-white font-semibold rounded-b-lg hover:bg-accent/90 transition"
             onClick={() => setMenuOpen(false)}
           >
             Join Waitlist

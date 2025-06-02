@@ -8,7 +8,7 @@ const Hero: React.FC = () => {
       {/* Left: Text & CTA */}
       <div className="flex-1 flex flex-col items-center lg:items-start gap-8 max-w-xl ml-0 md:ml-8 lg:ml-16">
         <h1 className="text-4xl md:text-5xl font-extrabold text-center lg:text-left text-gray-900 leading-tight">
-          Turn your food and restaurant photos into a month of scroll stopping social posts — in under an hour.
+          Turn restaurant photos into a month of <span className="text-accent">scroll-stopping</span> social posts — in minutes.
         </h1>
         <p className="text-lg md:text-xl text-center lg:text-left text-gray-600 max-w-lg">
           Plately is the only AI-powered content tool made just for restaurants.
@@ -23,11 +23,12 @@ const Hero: React.FC = () => {
           />
           <button
             type="submit"
-            className="bg-primary text-white font-semibold rounded-md px-6 py-3 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition"
+            className="bg-accent text-white font-semibold rounded-md px-6 py-3 hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 transition"
           >
-            Join Waitlist →
+            Join Waitlist
           </button>
         </form>
+        <p className="text-sm text-gray-500 max-w-lg text-center lg:text-left">We'll notify you when early access becomes available. No spam, ever.</p>
       </div>
       {/* Right: Illustration */}
       <div className="flex-1 flex items-center justify-center scale-90">

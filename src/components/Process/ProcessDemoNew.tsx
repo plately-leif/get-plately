@@ -192,7 +192,7 @@ const ProcessDemoNew: React.FC = () => {
         </div>
 
         {/* Right column: Social Media Posts */}
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4 pt-8 md:pt-12">
           {/* Step 3 header card */}
           <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden w-full max-w-md p-5">
             <h3 className="font-bold text-lg text-gray-900 flex items-center gap-2">
