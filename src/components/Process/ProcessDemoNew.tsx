@@ -15,13 +15,28 @@ const ProcessDemoNew: React.FC = () => {
   const [currentPostType, setCurrentPostType] = useState(0);
 
   // Cycle through post types
+  // Auto-cycle through post types, but pause when user manually navigates
+  const [autoCycle, setAutoCycle] = useState(true);
+  
   useEffect(() => {
+    if (!autoCycle) return;
+    
     const interval = setInterval(() => {
       setCurrentPostType((prev) => (prev + 1) % POST_TYPES.length);
     }, 5000); // Change every 5 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [autoCycle]);
+  
+  // Pause auto-cycling when user manually navigates, resume after 10 seconds
+  const handleManualNavigation = (index: number) => {
+    setAutoCycle(false);
+    setCurrentPostType(index);
+    
+    // Resume auto-cycling after 10 seconds of inactivity
+    const timeout = setTimeout(() => setAutoCycle(true), 10000);
+    return () => clearTimeout(timeout);
+  };
 
   return (
     <section className="w-full flex flex-col items-center px-4 md:px-10 py-16 md:py-24 bg-white relative overflow-hidden">
@@ -56,7 +71,7 @@ const ProcessDemoNew: React.FC = () => {
       </div>
 
       {/* Three-column layout */}
-      <div className="relative z-10 w-full max-w-[1200px] grid grid-cols-1 md:grid-cols-[1.2fr,auto,0.8fr] gap-6 md:gap-8 lg:gap-12">
+      <div className="relative z-10 w-full max-w-[1200px] grid grid-cols-1 md:grid-cols-[1fr,auto,1fr] gap-8 md:gap-8 lg:gap-12">
         {/* Left column: Input images */}
         <div className="flex flex-col gap-6 items-center">
           {/* Restaurant Photo Card */}
@@ -157,24 +172,27 @@ const ProcessDemoNew: React.FC = () => {
                 </svg>
               </div>
             </motion.div>
-            <div className="text-center mt-2 text-sm font-medium text-primary">
+            <div className="text-center mt-2 mb-4 text-sm font-medium text-primary">
               Plately AI Transforms
             </div>
           </div>
         </div>
 
         {/* Right column: Social Media Posts */}
-        <div className="flex flex-col items-center">
-          <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden w-full max-w-md">
-            <div className="p-4 border-b border-gray-100">
-              <h3 className="font-bold text-lg text-gray-900 flex items-center gap-2">
-                <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
-                Beautiful Social Post
-              </h3>
-              <p className="text-sm text-gray-600">Ready to share and engage your audience</p>
-            </div>
+        <div className="flex flex-col items-center gap-4">
+          {/* Step 3 header card */}
+          <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden w-full max-w-md p-5">
+            <h3 className="font-bold text-lg text-gray-900 flex items-center gap-2">
+              <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
+              Beautiful Social Post
+            </h3>
+            <p className="text-sm text-gray-600">Ready to share and engage your audience</p>
+          </div>
+          
+          {/* Social media post card */}
+          <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden w-full max-w-md">
             
-            <div className="relative w-full h-[650px] bg-gray-50 overflow-hidden">
+            <div className="relative w-full h-[600px] md:h-[650px] bg-gray-50 overflow-hidden">
               <AnimatePresence mode="wait">
                 {currentPostType === 0 && (
                   <motion.div 
@@ -369,16 +387,41 @@ const ProcessDemoNew: React.FC = () => {
                 )}
               </AnimatePresence>
               
-              {/* Post type indicators */}
-              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
-                {POST_TYPES.map((type, index) => (
-                  <button 
-                    key={type}
-                    className={`w-2 h-2 rounded-full ${currentPostType === index ? 'bg-primary' : 'bg-gray-300'}`}
-                    onClick={() => setCurrentPostType(index)}
-                    aria-label={`View ${type} post`}
-                  />
-                ))}
+              {/* Post type indicators with navigation arrows - moved below image */}
+              <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-3 py-5 bg-gradient-to-t from-black/40 to-transparent">
+                {/* Left arrow */}
+                <button 
+                  className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors"
+                  onClick={() => handleManualNavigation(currentPostType === 0 ? POST_TYPES.length - 1 : currentPostType - 1)}
+                  aria-label="Previous post"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
+                    <path d="M15 18l-6-6 6-6" />
+                  </svg>
+                </button>
+                
+                {/* Dots */}
+                <div className="flex gap-2">
+                  {POST_TYPES.map((type, index) => (
+                    <button 
+                      key={type}
+                      className={`w-2.5 h-2.5 rounded-full ${currentPostType === index ? 'bg-white' : 'bg-white/50'}`}
+                      onClick={() => handleManualNavigation(index)}
+                      aria-label={`View ${type} post`}
+                    />
+                  ))}
+                </div>
+                
+                {/* Right arrow */}
+                <button 
+                  className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors"
+                  onClick={() => handleManualNavigation(currentPostType === POST_TYPES.length - 1 ? 0 : currentPostType + 1)}
+                  aria-label="Next post"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
