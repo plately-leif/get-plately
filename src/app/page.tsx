@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar/Navbar";
 import Hero from "@/components/Hero/Hero";
+import SocialLogos from "@/components/SocialLogos/SocialLogos";
 import ProcessDemoNew from "@/components/Process/ProcessDemoNew";
 import Benefits from "@/components/Benefits/Benefits";
 import RestaurantSection from "@/components/Restaurant/RestaurantSection";
@@ -12,6 +13,7 @@ export default function Home() {
       <Navbar />
       <main className="flex-1 flex flex-col gap-0">
         <Hero />
+        <SocialLogos />
         <ProcessDemoNew />
         <Benefits />
         <RestaurantSection />
