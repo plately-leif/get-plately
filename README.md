@@ -18,7 +18,7 @@ A modern admin dashboard and content management system built with [Next.js](http
 - **Backend:** Payload CMS (self-hosted)
 - **Database:** PostgreSQL (via Supabase)
 - **Authentication:** Supabase Auth
-- **Deployment:** Vercel or Netlify
+- **Deployment:** AWS Amplify with Supabase Backend
 - **Styling:** Tailwind CSS, Headless UI
 
 ---
@@ -32,7 +32,62 @@ A modern admin dashboard and content management system built with [Next.js](http
 
 ---
 
-## 📝 Setup Instructions
+## 🚀 AWS Amplify Deployment
+
+### Prerequisites
+- AWS Account with Amplify access
+- Supabase project with database
+- GitHub repository for your project
+
+### 1. Connect to AWS Amplify
+1. Go to [AWS Amplify Console](https://console.aws.amazon.com/amplify/)
+2. Click "New app" > "Host web app"
+3. Choose your Git provider and select your repository
+4. Select the main branch
+
+### 2. Configure Build Settings
+Use the following build settings:
+
+```yaml
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*
+```
+
+### 3. Set Environment Variables
+Add these environment variables in the Amplify Console:
+
+```
+NEXT_PUBLIC_SERVER_URL=https://your-amplify-app-id.amplifyapp.com
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+PAYLOAD_SECRET=your_secure_random_string
+NODE_ENV=production
+```
+
+### 4. Configure Custom Domain (Optional)
+1. In Amplify Console, go to "Domain Management"
+2. Click "Add domain"
+3. Follow the instructions to verify your domain
+
+### 5. Deploy
+Click "Save and deploy" to start the deployment process.
+
+## 📝 Local Development Setup
 
 ### Prerequisites
 - Node.js 18+

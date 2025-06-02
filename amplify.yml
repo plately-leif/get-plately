@@ -1,0 +1,27 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*
+
+# Environment variables will be set in the Amplify Console
+# Make sure to add these in the AWS Amplify Console:
+# - NEXT_PUBLIC_SERVER_URL
+# - NEXT_PUBLIC_SUPABASE_URL
+# - NEXT_PUBLIC_SUPABASE_ANON_KEY
+# - PAYLOAD_SECRET
+# - DATABASE_URI (for server-side only)
+
+# Note: For security, never commit .env files with sensitive data
