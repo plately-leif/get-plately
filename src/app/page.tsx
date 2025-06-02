@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar/Navbar";
 import Hero from "@/components/Hero/Hero";
-import ProcessDemo from "@/components/Process/ProcessDemo";
+import ProcessDemoNew from "@/components/Process/ProcessDemoNew";
 import Benefits from "@/components/Benefits/Benefits";
 import RestaurantSection from "@/components/Restaurant/RestaurantSection";
 import FinalCTA from "@/components/FinalCTA/FinalCTA";
@@ -12,7 +12,7 @@ export default function Home() {
       <Navbar />
       <main className="flex-1 flex flex-col gap-0">
         <Hero />
-        <ProcessDemo />
+        <ProcessDemoNew />
         <Benefits />
         <RestaurantSection />
         <FinalCTA />
