@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-8 md:gap-16">
           <div className="flex flex-col gap-2 min-w-[100px]">
             <span className="font-semibold text-base">Product</span>
-            <a href="#login" className="text-sm text-white/80 hover:text-white">Login</a>
+            <a href="/signin" className="text-sm text-white/80 hover:text-white">Login</a>
           </div>
           <div className="flex flex-col gap-2 min-w-[100px]">
             <span className="font-semibold text-base">Company</span>

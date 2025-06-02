@@ -30,13 +30,13 @@ const Hero: React.FC = () => {
         </form>
       </div>
       {/* Right: Illustration */}
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center scale-90">
         <Image
           src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/plately-dashboard-mockup-50.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9wbGF0ZWx5LWRhc2hib2FyZC1tb2NrdXAtNTAuanBnIiwiaWF0IjoxNzQ4NjQxNDc4LCJleHAiOjMzMjU0NDE0Nzh9.-d6yIB4DOvhmw4VmQG7okeRNwLo2xkmoQz2WNMbFWHw"
           alt="Plately dashboard mockup"
-          width={800}
-          height={570}
-          className="w-full max-w-[800px] rounded-2xl shadow-lg object-contain"
+          width={720}
+          height={513}
+          className="w-full max-w-[720px] rounded-2xl shadow-lg object-contain"
           priority
         />
       </div>

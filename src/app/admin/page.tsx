@@ -15,7 +15,7 @@ export default function AdminDashboard() {
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session) {
-        router.push('/admin/login');
+        router.push('/signin');
         return;
       }
 
@@ -28,7 +28,7 @@ export default function AdminDashboard() {
 
       if (!userData || userData.role !== 'admin') {
         await supabase.auth.signOut();
-        router.push('/admin/login');
+        router.push('/signin');
         return;
       }
 
@@ -92,7 +92,8 @@ export default function AdminDashboard() {
                 <button
                   onClick={async () => {
                     await supabase.auth.signOut();
-                    router.push('/admin/login');
+                    router.push('/signin');
+                    router.refresh();
                   }}
                   className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md"
                 >

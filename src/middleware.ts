@@ -10,14 +10,13 @@ export async function middleware(request: NextRequest) {
   await supabase.auth.getSession();
   
   // Check if the user is trying to access the admin route
-  if (request.nextUrl.pathname.startsWith('/admin') && 
-      !request.nextUrl.pathname.startsWith('/admin/login')) {
+  if (request.nextUrl.pathname.startsWith('/admin')) {
     
     const { data: { session } } = await supabase.auth.getSession();
     
-    // If no session, redirect to login
+    // If no session, redirect to sign in
     if (!session) {
-      const redirectUrl = new URL('/admin/login', request.url);
+      const redirectUrl = new URL('/signin', request.url);
       redirectUrl.searchParams.set('redirectedFrom', request.nextUrl.pathname);
       return NextResponse.redirect(redirectUrl);
     }
@@ -31,7 +30,7 @@ export async function middleware(request: NextRequest) {
     
     if (error || userData?.role !== 'admin') {
       await supabase.auth.signOut();
-      const redirectUrl = new URL('/admin/login', request.url);
+      const redirectUrl = new URL('/signin', request.url);
       redirectUrl.searchParams.set('message', 'unauthorized');
       return NextResponse.redirect(redirectUrl);
     }

@@ -13,7 +13,7 @@ export async function adminAuthMiddleware(req: NextRequest) {
   // If there's no session, redirect to login
   if (!session) {
     const redirectUrl = req.nextUrl.clone();
-    redirectUrl.pathname = '/admin/login';
+    redirectUrl.pathname = '/signin';
     redirectUrl.searchParams.set('redirectedFrom', req.nextUrl.pathname);
     return NextResponse.redirect(redirectUrl);
   }

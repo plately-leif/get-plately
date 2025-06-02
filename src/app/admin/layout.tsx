@@ -10,9 +10,9 @@ export default async function AdminLayout({
   const supabase = createServerClient();
   const { data: { session } } = await supabase.auth.getSession();
 
-  // If no session, redirect to login
+  // If no session, redirect to sign in
   if (!session) {
-    redirect('/admin/login');
+    redirect('/signin');
   }
 
   // Check if user has admin role
@@ -24,7 +24,7 @@ export default async function AdminLayout({
 
   if (userData?.role !== 'admin') {
     await supabase.auth.signOut();
-    redirect('/admin/login?message=Unauthorized');
+    redirect('/signin?message=unauthorized');
   }
 
   return (
@@ -38,10 +38,21 @@ export default async function AdminLayout({
               </div>
             </div>
             <div className="flex items-center">
-              <form action="/auth/signout" method="post">
+              <form action="/auth/signout" method="post" className="m-0">
                 <button
                   type="submit"
                   className="text-sm font-medium text-gray-500 hover:text-gray-700"
+                  onClick={async (e) => {
+                    e.preventDefault();
+                    const form = e.currentTarget.form;
+                    if (form) {
+                      const response = await fetch('/auth/signout', {
+                        method: 'POST',
+                        redirect: 'manual',
+                      });
+                      window.location.href = '/signin';
+                    }
+                  }}
                 >
                   Sign out
                 </button>
