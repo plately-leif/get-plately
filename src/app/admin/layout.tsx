@@ -15,23 +15,16 @@ export default async function AdminLayout({
     redirect('/admin/login');
   }
 
-  // Temporarily bypass admin role check
-  console.log('User authenticated on server side');
-  
-  // Create or update user record with admin role
-  const { error: upsertError } = await supabase
+  // Check if user has admin role
+  const { data: userData } = await supabase
     .from('users')
-    .upsert([
-      {
-        id: session.user.id,
-        email: session.user.email,
-        role: 'admin',
-        created_at: new Date().toISOString(),
-      },
-    ]);
-  
-  if (upsertError) {
-    console.error('Error updating user role:', upsertError);
+    .select('role')
+    .eq('id', session.user.id)
+    .single();
+
+  if (userData?.role !== 'admin') {
+    await supabase.auth.signOut();
+    redirect('/admin/login?message=Unauthorized');
   }
 
   return (

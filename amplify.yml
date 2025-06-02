@@ -16,6 +16,21 @@ frontend:
       - node_modules/**/*
       - .next/cache/**/*
 
+# Build settings to control when builds happen
+build_settings:
+  branches:
+    # Only build on production branch
+    production:
+      # Build on all pushes to production branch
+      build: true
+    # Only build on main branch when explicitly triggered
+    main:
+      # Don't auto-build on every push to main
+      build: false
+  # Disable automatic builds on pull requests
+  pull_requests:
+    build: false
+
 # Environment variables will be set in the Amplify Console
 # Make sure to add these in the AWS Amplify Console:
 # - NEXT_PUBLIC_SERVER_URL
