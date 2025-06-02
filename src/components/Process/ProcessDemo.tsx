@@ -12,14 +12,6 @@ const ProcessDemo: React.FC = () => {
         <h2 className="text-[2rem] md:text-[2.25rem] font-bold text-[#111827] leading-tight">See Plately in action</h2>
         <p className="text-base md:text-lg font-bold text-[#6B7280]">From your basic photos to stunning social media posts</p>
       </div>
-      {/* HEADER - Screenshot style */}
-      <div className="flex flex-col items-center w-full max-w-[1200px] mx-auto mb-8">
-        <div className="flex flex-row items-center justify-center gap-3 mb-2">
-          <span className="text-[#EF4444] font-bold text-xl md:text-2xl uppercase tracking-wide">BEFORE:</span>
-          <span className="text-[#111827] font-bold text-xl md:text-2xl">Your Quick Photo Snaps</span>
-        </div>
-        <p className="text-[#6B7280] text-base md:text-lg text-center max-w-2xl">Just upload one photo of your restaurant and one of your food. Plately AI takes care of the rest.</p>
-      </div>
       {/* FIVE COLUMN ROW - No card, larger images */}
       <div className="w-full max-w-[1200px] flex flex-row items-center justify-center gap-8 mb-10">
         {/* 1. Step 1: Number, Label, Description */}

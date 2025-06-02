@@ -1,26 +1,43 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        accent: '#FE644D',
-        primary: '#0B3954',
-        'bg-1': '#F9FAFB',
-        'bg-2': '#F9FAFB',
-        text: '#111827',
-        'secondary-text': '#6B7280',
-        border: '#E5E7EB',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        accent: {
+          DEFAULT: '#FE644D',
+          dark: '#FE644D',
+        },
+        primary: {
+          DEFAULT: '#0B3954',
+          dark: '#0B3954',
+        },
+        text: {
+          DEFAULT: '#111827',
+          dark: '#F9FAFB',
+        },
+        'secondary-text': {
+          DEFAULT: '#6B7280',
+          dark: '#9CA3AF',
+        },
+        border: {
+          DEFAULT: '#E5E7EB',
+          dark: '#374151',
+        },
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
       },
     },
   },
-  plugins: [],
-}; 
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
+};
