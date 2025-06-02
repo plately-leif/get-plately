@@ -11,6 +11,11 @@ const POST_TYPES = ["instagram", "facebook", "tiktok"];
 const RESTAURANT_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/Restaurant-interior.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9SZXN0YXVyYW50LWludGVyaW9yLmpwZyIsImlhdCI6MTc0ODgwMTU1MiwiZXhwIjoxNzgwMzM3NTUyfQ.L-5carpWOdA-M7uCbHVEo_O8NrtpLPdS7Hq-PUYRvkw";
 const FOOD_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/burger.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9idXJnZXIuanBlZyIsImlhdCI6MTc0ODY3MzI2OSwiZXhwIjoxOTA2MzUzMjY5fQ.EryvkWF0ruvwsf6PVofVLctKRUDF06UYCdp_IpNHAsc";
 
+// New carousel images for social media posts
+const INSTAGRAM_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/cheddar-bacon-hamburger-1.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83MjFkNWFmMy04OTI0LTRjMWItYWE1YS02MzFkMWM4N2M3M2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9jaGVkZGFyLWJhY29uLWhhbWJ1cmdlci0xLmpwZyIsImlhdCI6MTc0ODg5NTg5OCwiZXhwIjoxNzgwNDMxODk4fQ.2FVYkhMSToxnKvVH6Nqcpn77rAV-M2xVYpzZZsJg42I";
+const FACEBOOK_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/cheddar-bacon-hamburger-3.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83MjFkNWFmMy04OTI0LTRjMWItYWE1YS02MzFkMWM4N2M3M2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9jaGVkZGFyLWJhY29uLWhhbWJ1cmdlci0zLmpwZyIsImlhdCI6MTc0ODg5NTkzNCwiZXhwIjoxNzgwNDMxOTM0fQ.1U3HBA8-20cdaBX7qmLmzbJay8PH879TxZJ-qwJjX1k";
+const TIKTOK_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/cheddar-bacon-hamburger-2.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83MjFkNWFmMy04OTI0LTRjMWItYWE1YS02MzFkMWM4N2M3M2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9jaGVkZGFyLWJhY29uLWhhbWJ1cmdlci0yLmpwZyIsImlhdCI6MTc0ODg5NTk2MywiZXhwIjoxNzgwNDMxOTYzfQ.C0fj0QYWt3TqnGmpcqgQRqUGGTdJnfQRlE2XIpZFpqw";
+
 const ProcessDemoNew: React.FC = () => {
   const [currentPostType, setCurrentPostType] = useState(0);
 
@@ -192,7 +197,7 @@ const ProcessDemoNew: React.FC = () => {
           {/* Social media post card */}
           <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden w-full max-w-md">
             
-            <div className="relative w-full h-[600px] md:h-[650px] bg-gray-50 overflow-hidden">
+            <div className="relative w-full h-[700px] md:h-[750px] bg-gray-50 overflow-hidden">
               <AnimatePresence mode="wait">
                 {currentPostType === 0 && (
                   <motion.div 
@@ -210,16 +215,11 @@ const ProcessDemoNew: React.FC = () => {
                           <div className="w-8 h-8 rounded-full bg-gray-300"></div>
                           <span className="font-medium text-sm">plately.restaurant</span>
                         </div>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <circle cx="12" cy="12" r="1" />
-                          <circle cx="19" cy="12" r="1" />
-                          <circle cx="5" cy="12" r="1" />
-                        </svg>
                       </div>
                       <div className="flex-grow bg-gray-200 relative flex items-center justify-center" style={{ minHeight: '480px' }}>
                         <Image
-                          src={FOOD_IMG}
-                          alt="Instagram post of burger"
+                          src={INSTAGRAM_IMG}
+                          alt="Instagram post of cheddar bacon burger"
                           fill
                           style={{ objectFit: 'cover' }}
                           sizes="(max-width: 640px) 100vw, 400px"
@@ -281,8 +281,8 @@ const ProcessDemoNew: React.FC = () => {
                       </div>
                       <div className="flex-grow bg-gray-200 mt-3 relative flex items-center justify-center" style={{ minHeight: '480px' }}>
                         <Image
-                          src={FOOD_IMG}
-                          alt="Facebook post of burger"
+                          src={FACEBOOK_IMG}
+                          alt="Facebook post of cheddar bacon burger"
                           fill
                           style={{ objectFit: 'cover' }}
                           sizes="(max-width: 640px) 100vw, 400px"
@@ -340,8 +340,8 @@ const ProcessDemoNew: React.FC = () => {
                     <div className="w-full h-full flex flex-col bg-black">
                       <div className="flex-grow relative flex items-center justify-center" style={{ minHeight: '530px' }}>
                         <Image
-                          src={FOOD_IMG}
-                          alt="TikTok video of burger"
+                          src={TIKTOK_IMG}
+                          alt="TikTok video of cheddar bacon burger"
                           fill
                           style={{ objectFit: 'cover' }}
                           sizes="(max-width: 640px) 100vw, 400px"
@@ -387,42 +387,7 @@ const ProcessDemoNew: React.FC = () => {
                 )}
               </AnimatePresence>
               
-              {/* Post type indicators with navigation arrows - moved below image */}
-              <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-3 py-5 bg-gradient-to-t from-black/40 to-transparent">
-                {/* Left arrow */}
-                <button 
-                  className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors"
-                  onClick={() => handleManualNavigation(currentPostType === 0 ? POST_TYPES.length - 1 : currentPostType - 1)}
-                  aria-label="Previous post"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
-                    <path d="M15 18l-6-6 6-6" />
-                  </svg>
-                </button>
-                
-                {/* Dots */}
-                <div className="flex gap-2">
-                  {POST_TYPES.map((type, index) => (
-                    <button 
-                      key={type}
-                      className={`w-2.5 h-2.5 rounded-full ${currentPostType === index ? 'bg-white' : 'bg-white/50'}`}
-                      onClick={() => handleManualNavigation(index)}
-                      aria-label={`View ${type} post`}
-                    />
-                  ))}
-                </div>
-                
-                {/* Right arrow */}
-                <button 
-                  className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors"
-                  onClick={() => handleManualNavigation(currentPostType === POST_TYPES.length - 1 ? 0 : currentPostType + 1)}
-                  aria-label="Next post"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
-                </button>
-              </div>
+              {/* Removed indicator dots */}
             </div>
           </div>
         </div>
