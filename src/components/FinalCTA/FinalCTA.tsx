@@ -24,11 +24,18 @@ const FinalCTA: React.FC = () => {
     <section className="relative w-full overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 bg-accent">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10">
-          <div className="absolute top-0 left-0 w-24 h-24 md:w-40 md:h-40 rounded-full bg-white -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 right-0 w-32 h-32 md:w-48 md:h-48 rounded-full bg-white translate-x-1/3 translate-y-1/3"></div>
-          <div className="absolute top-1/4 right-1/4 w-16 h-16 rounded-full bg-white opacity-30"></div>
-          <div className="absolute bottom-1/3 left-1/3 w-20 h-20 rounded-full bg-white opacity-20"></div>
+        {/* Logo-inspired background elements */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] opacity-5" style={{ transform: 'translateY(-30%) translateX(30%) rotate(45deg)' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 195 196" fill="none">
+            <path fill="#FFFFFF" d="M194.462 97.71c0 53.964-43.532 97.71-97.231 97.71C43.531 195.42 0 151.674 0 97.71 0 43.746 43.532 0 97.231 0s97.231 43.746 97.231 97.71Zm-175.016 0c0 43.171 34.826 78.168 77.785 78.168 42.959 0 77.785-34.997 77.785-78.168 0-43.171-34.826-78.168-77.785-78.168-42.96 0-77.785 34.997-77.785 78.168Z"/>
+            <path fill="#FFFFFF" d="M134.755 97.71c13.4 0 24.688 11.264 19.56 23.645a61.787 61.787 0 0 1-114.168 0c-5.128-12.381 6.16-23.645 19.56-23.645h75.048Z"/>
+          </svg>
+        </div>
+        <div className="absolute bottom-0 left-0 w-[450px] h-[450px] opacity-5" style={{ transform: 'translateY(20%) translateX(-20%) rotate(-30deg)' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 195 196" fill="none">
+            <path fill="#FFFFFF" d="M194.462 97.71c0 53.964-43.532 97.71-97.231 97.71C43.531 195.42 0 151.674 0 97.71 0 43.746 43.532 0 97.231 0s97.231 43.746 97.231 97.71Zm-175.016 0c0 43.171 34.826 78.168 77.785 78.168 42.959 0 77.785-34.997 77.785-78.168 0-43.171-34.826-78.168-77.785-78.168-42.96 0-77.785 34.997-77.785 78.168Z"/>
+            <path fill="#FFFFFF" d="M134.755 97.71c13.4 0 24.688 11.264 19.56 23.645a61.787 61.787 0 0 1-114.168 0c-5.128-12.381 6.16-23.645 19.56-23.645h75.048Z"/>
+          </svg>
         </div>
       </div>
 
