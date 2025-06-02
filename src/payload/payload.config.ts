@@ -99,7 +99,7 @@ const config = buildConfig({
     },
   },
   routes: {
-    admin: '/admin',
+    admin: '/payload-admin',
   },
   db: postgresAdapter({
     pool: {
