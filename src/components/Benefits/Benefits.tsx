@@ -84,7 +84,7 @@ const Benefits: React.FC = () => {
   return (
     <section className="relative w-full overflow-hidden py-24">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50">
+      <div className="absolute inset-0 bg-white">
         {/* Logo-inspired circular ring */}
         <div className="absolute top-1/2 left-0 w-[515px] h-[515px] opacity-5" style={{ transform: 'translateY(-50%) translateX(-45%) rotate(20deg)' }}>
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 195 196" fill="none">

@@ -44,20 +44,28 @@ const ProcessDemoNew: React.FC = () => {
   };
 
   return (
-    <section className="w-full flex flex-col items-center px-4 md:px-10 py-16 md:py-24 bg-white relative overflow-hidden">
+    <section className="w-full flex flex-col items-center px-4 md:px-10 py-16 md:py-24 bg-gray-50 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
         {/* Logo-inspired circular ring - top right */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] opacity-5" style={{ transform: 'translateY(-30%) translateX(30%) rotate(35deg)' }}>
+        <div className="absolute top-0 right-0 w-[650px] h-[650px] opacity-5" style={{ transform: 'translateY(-30%) translateX(30%) rotate(35deg)' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 195 196" fill="none">
+            <path fill="#FE644D" d="M194.462 97.71c0 53.964-43.532 97.71-97.231 97.71C43.531 195.42 0 151.674 0 97.71 0 43.746 43.532 0 97.231 0s97.231 43.746 97.231 97.71Zm-175.016 0c0 43.171 34.826 78.168 77.785 78.168 42.959 0 77.785-34.997 77.785-78.168 0-43.171-34.826-78.168-77.785-78.168-42.96 0-77.785 34.997-77.785 78.168Z"/>
+            <path fill="#FE644D" d="M134.755 97.71c13.4 0 24.688 11.264 19.56 23.645a61.787 61.787 0 0 1-114.168 0c-5.128-12.381 6.16-23.645 19.56-23.645h75.048Z"/>
+          </svg>
+        </div>
+        {/* Logo-inspired circular ring - left side 10% from top */}
+        <div className="absolute top-[10%] left-0 w-[450px] h-[450px] opacity-5" style={{ transform: 'translateX(-30%) rotate(15deg)' }}>
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 195 196" fill="none">
             <path fill="#FE644D" d="M194.462 97.71c0 53.964-43.532 97.71-97.231 97.71C43.531 195.42 0 151.674 0 97.71 0 43.746 43.532 0 97.231 0s97.231 43.746 97.231 97.71Zm-175.016 0c0 43.171 34.826 78.168 77.785 78.168 42.959 0 77.785-34.997 77.785-78.168 0-43.171-34.826-78.168-77.785-78.168-42.96 0-77.785 34.997-77.785 78.168Z"/>
             <path fill="#FE644D" d="M134.755 97.71c13.4 0 24.688 11.264 19.56 23.645a61.787 61.787 0 0 1-114.168 0c-5.128-12.381 6.16-23.645 19.56-23.645h75.048Z"/>
           </svg>
         </div>
         {/* Logo-inspired circular ring - bottom left */}
-        <div className="absolute bottom-0 left-0 w-[450px] h-[450px] opacity-5" style={{ transform: 'translateY(25%) translateX(-25%) rotate(-25deg)' }}>
+        <div className="absolute bottom-0 left-0 w-[550px] h-[550px] opacity-5" style={{ transform: 'translateY(25%) translateX(-25%) rotate(-25deg)' }}>
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 195 196" fill="none">
             <path fill="#FE644D" d="M194.462 97.71c0 53.964-43.532 97.71-97.231 97.71C43.531 195.42 0 151.674 0 97.71 0 43.746 43.532 0 97.231 0s97.231 43.746 97.231 97.71Zm-175.016 0c0 43.171 34.826 78.168 77.785 78.168 42.959 0 77.785-34.997 77.785-78.168 0-43.171-34.826-78.168-77.785-78.168-42.96 0-77.785 34.997-77.785 78.168Z"/>
+            <path fill="#FE644D" d="M134.755 97.71c13.4 0 24.688 11.264 19.56 23.645a61.787 61.787 0 0 1-114.168 0c-5.128-12.381 6.16-23.645 19.56-23.645h75.048Z"/>
           </svg>
         </div>
       </div>
