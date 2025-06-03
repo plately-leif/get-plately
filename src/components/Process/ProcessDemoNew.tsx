@@ -167,7 +167,7 @@ const ProcessDemoNew: React.FC = () => {
                 </svg>
               </div>
             </motion.div>
-            <div className="text-center mt-2 text-sm font-medium text-primary">
+            <div className="text-center mt-2 text-sm font-bold text-primary">
               Plately AI<br />Transforms
             </div>
           </div>
@@ -185,7 +185,7 @@ const ProcessDemoNew: React.FC = () => {
                 </svg>
               </div>
             </motion.div>
-            <div className="text-center mt-2 mb-4 text-sm font-medium text-primary">
+            <div className="text-center mt-2 mb-4 text-sm font-bold text-primary">
               Plately AI Transforms
             </div>
           </div>
