@@ -11,30 +11,45 @@ export interface WaitlistEntry {
   utm_term?: string;
   utm_content?: string;
   page_url?: string;
+  ip_address?: string;
+  country?: string;
+  region?: string;
+  city?: string;
 }
 
 export const addToWaitlist = async (entry: WaitlistEntry) => {
   try {
-    // Get additional browser info if available
+    // Get IP info if in browser
+    let ipInfo = null;
+    if (typeof window !== 'undefined') {
+      const { getIPInfo } = await import('@/lib/utils/ip-utils');
+      ipInfo = await getIPInfo();
+    }
+
+    // Get additional browser info
     const browserInfo = typeof window !== 'undefined' ? {
       user_agent: window.navigator.userAgent,
       referrer: document.referrer,
       page_url: window.location.href,
+      ...(ipInfo ? {
+        ip_address: ipInfo.ip,
+        country: ipInfo.country,
+        region: ipInfo.region,
+        city: ipInfo.city
+      } : {})
     } : {};
 
     const { data, error } = await supabase
       .from('waitlist')
-      .insert([
-        { 
-          email: entry.email,
-          ...browserInfo,
-          utm_source: new URLSearchParams(window.location.search).get('utm_source') || undefined,
-          utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || undefined,
-          utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || undefined,
-          utm_term: new URLSearchParams(window.location.search).get('utm_term') || undefined,
-          utm_content: new URLSearchParams(window.location.search).get('utm_content') || undefined,
-        }
-      ])
+      .insert([{ 
+        email: entry.email,
+        ...browserInfo,
+        utm_source: new URLSearchParams(window.location.search).get('utm_source') || undefined,
+        utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || undefined,
+        utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || undefined,
+        utm_term: new URLSearchParams(window.location.search).get('utm_term') || undefined,
+        utm_content: new URLSearchParams(window.location.search).get('utm_content') || undefined,
+      }])
       .select();
 
     if (error) throw error;

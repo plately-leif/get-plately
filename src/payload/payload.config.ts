@@ -1,3 +1,4 @@
+import React from 'react';
 import { buildConfig } from 'payload/config';
 import { webpackBundler } from '@payloadcms/bundler-webpack';
 import { postgresAdapter } from '@payloadcms/db-postgres';
@@ -5,8 +6,13 @@ import { slateEditor } from '@payloadcms/richtext-slate';
 import path from 'path';
 import { createServerClient } from '@/utils/supabase/server';
 
+// Import the AdminDashboard component
+import AdminDashboard from './components/AdminDashboard';
+
 import { BlogPost } from './collections/BlogPost';
 import { Media } from './collections/Media';
+import { Waitlist } from './collections/Waitlist';
+import { customEndpoints } from './endpoints';
 
 // Create a custom auth strategy that works with Supabase
 const createSupabaseAuth = () => {
@@ -88,6 +94,7 @@ const config = buildConfig({
   collections: [
     BlogPost,
     Media,
+    Waitlist,
   ],
   admin: {
     user: 'users',
@@ -97,7 +104,14 @@ const config = buildConfig({
       favicon: '/favicon.ico',
       ogImage: '/og-image.png',
     },
+    components: {
+      // Add a custom dashboard
+      views: {
+        Dashboard: AdminDashboard,
+      },
+    },
   },
+  endpoints: customEndpoints,
   routes: {
     admin: '/payload-admin',
   },

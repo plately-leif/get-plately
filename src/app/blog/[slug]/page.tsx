@@ -2,11 +2,18 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getPayload } from 'payload';
-import configPromise from '@payload-config';
-import { RichText } from 'payload/richtext-slate';
+import config from '../../../../src/payload/payload.config';
+// If you don't have a RichText renderer, fallback to rendering raw content or a custom component
+// import { RichText } from 'payload/components/RichText';
+const RichText = ({ content }: { content: any }) => (
+  <div>{typeof content === 'string' ? content : JSON.stringify(content)}</div>
+);
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const payload = await getPayload({ config: configPromise });
+  const payload = await getPayload({
+    config,
+    secret: process.env.PAYLOAD_SECRET || '',
+  });
   
   const result = await payload.find({
     collection: 'blog-posts',
@@ -20,11 +27,55 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     },
   });
 
-  const post = result.docs[0];
+  type BlogPost = {
+    title: string;
+    publishedDate?: string;
+    category?: string;
+    image?: string | { url: string };
+    content?: any;
+    author?: {
+      name?: string;
+      bio?: string;
+    };
+  };
 
-  if (!post) {
+  const rawPost = result.docs[0];
+
+  if (!rawPost) {
     notFound();
   }
+
+  // Defensive conversion with type guards
+  function isImageObj(img: unknown): img is { url: string } {
+    return typeof img === 'object' && img !== null && 'url' in img && typeof (img as any).url === 'string';
+  }
+  function isAuthorObj(author: unknown): author is { name?: string; bio?: string } {
+    return typeof author === 'object' && author !== null && (
+      'name' in author || 'bio' in author
+    );
+  }
+  let image: string | { url: string } | undefined = undefined;
+  if (typeof rawPost.image === 'string') {
+    image = rawPost.image;
+  } else if (isImageObj(rawPost.image)) {
+    image = { url: rawPost.image.url };
+  }
+  let author: { name?: string; bio?: string } | undefined = undefined;
+  if (isAuthorObj(rawPost.author)) {
+    author = {
+      name: typeof rawPost.author.name === 'string' ? rawPost.author.name : undefined,
+      bio: typeof rawPost.author.bio === 'string' ? rawPost.author.bio : undefined,
+    };
+  }
+  const post: BlogPost = {
+    title: typeof rawPost.title === 'string' ? rawPost.title : '',
+    publishedDate: typeof rawPost.publishedDate === 'string' ? rawPost.publishedDate : undefined,
+    category: typeof rawPost.category === 'string' ? rawPost.category : undefined,
+    image,
+    content: rawPost.content,
+    author,
+  };
+
 
   return (
     <article className="flex flex-col items-start justify-center w-full max-w-3xl mx-auto px-4 py-16">
@@ -34,12 +85,12 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         </h1>
         
         <div className="mt-6 flex items-center gap-x-4 text-sm">
-          <time dateTime={post.publishedDate} className="text-gray-500">
-            {new Date(post.publishedDate).toLocaleDateString('en-US', {
+          <time dateTime={post.publishedDate || ''} className="text-gray-500">
+            {post.publishedDate ? new Date(post.publishedDate).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
-            })}
+            }) : ''}
           </time>
           {post.category && (
             <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600">
@@ -51,7 +102,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         {post.image && (
           <div className="mt-8 relative w-full h-96 rounded-2xl overflow-hidden">
             <Image
-              src={typeof post.image === 'string' ? post.image : post.image.url}
+              src={typeof post.image === 'string' ? post.image : (post.image?.url || '')}
               alt={post.title}
               fill
               className="object-cover"
@@ -89,7 +140,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 }
 
 export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise });
+  const payload = await getPayload({
+    config,
+    secret: process.env.PAYLOAD_SECRET || '',
+  });
   const posts = await payload.find({
     collection: 'blog-posts',
     limit: 100,

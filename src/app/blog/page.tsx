@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getPayload } from 'payload';
-import configPromise from '@payload-config';
+import config from '../../../src/payload/payload.config';
 
 export default async function BlogPage() {
-  const payload = await getPayload({ config: configPromise });
+  const payload = await getPayload({
+    config,
+    secret: process.env.PAYLOAD_SECRET || '',
+  });
   
   const posts = await payload.find({
     collection: 'blog-posts',

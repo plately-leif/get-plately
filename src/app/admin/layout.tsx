@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 import { createServerClient } from '@/utils/supabase/server';
+import AdminShell from './AdminShell';
 
 export default async function AdminLayout({
   children,
@@ -27,45 +28,6 @@ export default async function AdminLayout({
     redirect('/signin?message=unauthorized');
   }
 
-  return (
-    <div className="min-h-screen bg-gray-100">
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <h1 className="text-xl font-bold text-gray-900">Admin Panel</h1>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <form action="/auth/signout" method="post" className="m-0">
-                <button
-                  type="submit"
-                  className="text-sm font-medium text-gray-500 hover:text-gray-700"
-                  onClick={async (e) => {
-                    e.preventDefault();
-                    const form = e.currentTarget.form;
-                    if (form) {
-                      const response = await fetch('/auth/signout', {
-                        method: 'POST',
-                        redirect: 'manual',
-                      });
-                      window.location.href = '/signin';
-                    }
-                  }}
-                >
-                  Sign out
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </nav>
-      <main className="py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {children}
-        </div>
-      </main>
-    </div>
-  );
+  // Render the client-side shell for interactivity
+  return <AdminShell>{children}</AdminShell>;
 }
