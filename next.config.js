@@ -7,48 +7,25 @@ const nextConfig = {
         resourceRegExp: /^cloudflare:sockets$/,
       })
     );
-
-    // Exclude specific modules from being processed
-    config.externals = config.externals || [];
-    config.externals.push({
-      'drizzle-kit': 'drizzle-kit',
-      '@drizzle-kit/plugin': '@drizzle-kit/plugin',
-      'esbuild': 'esbuild',
-      'pg-native': 'pg-native',
-      'pg-cloudflare': 'pg-cloudflare',
-    });
-
-    // Ignore TypeScript declaration files
-    config.module.rules.push({
-      test: /\.d\.ts$/,
-      loader: 'ignore-loader',
-    });
-
-    // Ignore markdown files
-    config.module.rules.push({
-      test: /\.md$/,
-      loader: 'ignore-loader',
-    });
-
-    // Important: return the modified config
     return config;
   },
-  
-  // Enable experimental features
-  experimental: {
-    serverComponentsExternalPackages: [
-      'pg',
-      'drizzle-orm',
-      'drizzle-kit',
-      '@payloadcms',
-      'payload',
-      'sharp',
-      'file-type',
-      'formidable',
-    ],
-    // Enable CSS optimizations
-    optimizeCss: true,
+  // Disable TypeScript type checking during build
+  typescript: {
+    ignoreBuildErrors: true,
   },
+  // Disable ESLint during build
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  // Disable source maps in production for better performance
+  productionBrowserSourceMaps: false,
+  // For Amplify deployment
+  output: 'standalone',
+  trailingSlash: true,
+  swcMinify: true,
+  compress: true,
+  // Enable React strict mode
+  reactStrictMode: true,
   // Configure images
   images: {
     domains: [
@@ -58,38 +35,13 @@ const nextConfig = {
       'plately-leif-get-plately-prod.s3.amazonaws.com',
       's3.amazonaws.com',
       'lh3.googleusercontent.com',
+      'wiqdmiimlxxuhrvhhuxs.supabase.co',
+      'randomuser.me'
     ],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: '**',
-      },
-    ],
-  },
-  
-  // Disable TypeScript type checking during build
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  
-  // Disable ESLint during build
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'wiqdmiimlxxuhrvhhuxs.supabase.co',
-        port: '',
-        pathname: '/storage/v1/object/sign/website-assets/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'randomuser.me',
-        port: '',
-        pathname: '/**',
       },
       {
         protocol: 'https',
@@ -102,10 +54,6 @@ const nextConfig = {
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  // For Amplify deployment
-  output: 'standalone',
-  // Enable React strict mode
-  reactStrictMode: true,
   // Configure CORS for Supabase
   async headers() {
     return [

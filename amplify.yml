@@ -3,12 +3,9 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm cache clean --force
-        - npm install -g npm@8
         - npm ci
     build:
       commands:
-        - echo "Building Next.js app..."
         - npm run build
   artifacts:
     baseDirectory: .next
@@ -17,13 +14,8 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-      - .next/cache/**/*
   environment:
-    # Enable Next.js standalone output
     NEXT_TELEMETRY_DISABLED: 1
-    # Enable more verbose logging
-    DEBUG: 1
-    # Set node options for better memory management
     NODE_OPTIONS: --max_old_space_size=4096
 
 # Build settings to control when builds happen
