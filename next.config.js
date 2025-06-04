@@ -1,14 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config, { isServer, webpack }) => {
-    // Ignore specific problematic modules
-    config.plugins.push(
-      new webpack.IgnorePlugin({
-        resourceRegExp: /^cloudflare:sockets$/,
-      })
-    );
-    return config;
-  },
   // Disable TypeScript type checking during build
   typescript: {
     ignoreBuildErrors: true,
