@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm ci
+        - npx npm@8 ci
     build:
       commands:
         - npm run build
@@ -15,6 +15,15 @@ frontend:
     paths:
       - node_modules/**/*
       - .next/cache/**/*
+      - .next/standalone/**/*
+      - .next/static/**/*
+  environment:
+    # Enable Next.js standalone output
+    NEXT_TELEMETRY_DISABLED: 1
+    # Enable more verbose logging
+    DEBUG: 1
+    # Set node options for better memory management
+    NODE_OPTIONS: --max_old_space_size=4096
 
 # Build settings to control when builds happen
 build_settings:

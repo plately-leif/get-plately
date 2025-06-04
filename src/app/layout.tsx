@@ -7,7 +7,14 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+// Base URL for metadata (used for social sharing)
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+  : new URL('https://getplately.com');
+
 export const metadata: Metadata = {
+  metadataBase: baseUrl,
+  
   // ≤ 60 chars, front-loads the primary keyword
   title: "Plately – AI Social-Media Marketing for Restaurants",
 
@@ -29,48 +36,75 @@ export const metadata: Metadata = {
   authors: [{ name: "Plately" }],
   creator: "Plately",
   publisher: "Plately",
-
+  
+  // Open Graph / Facebook
   openGraph: {
     title: "Plately – AI Social-Media Marketing for Restaurants",
-    description:
-     "Effortlessly create stunning social media posts for your food business with Plately! Generate, schedule, track content and engagement. No design skills needed.",
-    url: "https://plately.com",
+    description: "Convert menu photos to stunning social media posts in minutes with Plately's AI-powered restaurant marketing tools.",
+    url: baseUrl.toString(),
     siteName: "Plately",
+    locale: "en_US",
+    type: "website",
     images: [
       {
-        url: "/plately-og-1200x630.jpg",
+        url: new URL('/og-image.jpg', baseUrl).toString(),
         width: 1200,
         height: 630,
-        alt: "Plately turns menu photos into social-media posts"
-      }
+        alt: 'Plately - AI-Powered Social Media for Restaurants',
+      },
     ],
-    locale: "en_US",
-    type: "website"
   },
-
+  
+  // Twitter Card
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: "Plately – AI Social-Media Marketing for Restaurants",
-    description:
-      "Create scroll-stopping food posts in seconds. Plately is the all-in-one AI scheduler made for restaurants.",
-    images: ["/plately-og-1200x630.jpg"],
-    creator: "@plately"
+    description: "Convert menu photos to stunning social media posts in minutes with Plately's AI-powered restaurant marketing tools.",
+    images: [new URL('/twitter-image.jpg', baseUrl).toString()],
+    creator: '@getplately',
   },
-
+  
+  // Other metadata
   robots: {
     index: true,
-    follow: true
-  }
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  
+  // Icons
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+  
+  // Theme color
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ],
 };
 
+// Root layout component
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
+    <html lang="en" className={inter.variable}>
+      <head>
+        {/* Add any additional head elements here */}
+      </head>
+      <body className={`${inter.className} min-h-screen bg-white`}>
         {children}
       </body>
     </html>

@@ -37,12 +37,35 @@ const nextConfig = {
   // Enable experimental features
   experimental: {
     serverComponentsExternalPackages: [
-      'pg', 
-      'drizzle-kit', 
-      '@drizzle-kit/plugin',
-      'esbuild',
-      'pg-native',
-      'pg-cloudflare'
+      'pg',
+      'drizzle-orm',
+      'drizzle-kit',
+      '@payloadcms',
+      'payload',
+      'sharp',
+      'file-type',
+      'formidable',
+    ],
+    // Enable CSS optimizations
+    optimizeCss: true,
+    // Enable custom cache handler
+    cacheHandler: require.resolve('./cache-handler.js'),
+  },
+  // Configure images
+  images: {
+    domains: [
+      'localhost',
+      'plately-leif-get-plately-dev.s3.amazonaws.com',
+      'plately-leif-get-plately-staging.s3.amazonaws.com',
+      'plately-leif-get-plately-prod.s3.amazonaws.com',
+      's3.amazonaws.com',
+      'lh3.googleusercontent.com',
+    ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
     ],
   },
   

@@ -128,12 +128,21 @@ function SignInForm() {
 // Main component that wraps the form in a Suspense boundary
 export default function SignInPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+    <div>
+      <Head>
+        <title>Sign In</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </Head>
+      <div className="min-h-screen bg-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <Suspense fallback={
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FE644D] mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading sign in form...</p>
+          </div>
+        }>
+          <SignInForm />
+        </Suspense>
       </div>
-    }>
-      <SignInForm />
-    </Suspense>
+    </div>
   );
 }
