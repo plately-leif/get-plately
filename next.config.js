@@ -48,8 +48,6 @@ const nextConfig = {
     ],
     // Enable CSS optimizations
     optimizeCss: true,
-    // Enable custom cache handler
-    cacheHandler: require.resolve('./cache-handler.js'),
   },
   // Configure images
   images: {
