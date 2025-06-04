@@ -356,37 +356,96 @@ const ProcessDemoNew: React.FC = () => {
                           priority
                         />
                         
-                        {/* Top Center: Following | For You */}
-                        <div className="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-4 z-10">
-                          <span className="text-white/60 font-medium text-sm">Following</span>
-                          <span className="text-white font-bold text-sm border-b-2 border-white">For You</span>
+                        {/* Top Navigation Bar */}
+                        <div className="absolute top-0 left-0 right-0 p-4 z-10 flex items-center justify-between">
+                          {/* Left side - Empty to balance the layout */}
+                          <div className="w-6"></div>
+                          
+                          {/* Center - Navigation Tabs */}
+                          <div className="flex items-center gap-8">
+                            <span className="text-white/70 text-base">Following</span>
+                            <span className="text-white text-base font-semibold border-b-2 border-white pb-1">For You</span>
+                          </div>
+                          
+                          {/* Right side - Search Icon */}
+                          <div className="w-6">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                              <circle cx="11" cy="11" r="8"/>
+                              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                          </div>
                         </div>
                         
-                        {/* Bottom Left: Meta Data */}
-                        <div className="absolute bottom-4 left-4 z-10 flex flex-col gap-2 max-w-[60%]">
-                          <span className="font-semibold text-white text-sm">@plately.tiktok</span>
-                          <span className="text-white text-xs leading-snug">POV: You just found your new favorite burger spot. <span className="text-[#25F4EE]">#burger</span> <span className="text-[#FE2C55]">#foodie</span> <span className="text-white">#viral</span></span>
-                          <span className="flex items-center gap-2 text-white/80 text-xs"><svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17" stroke="#fff" strokeWidth="2"/><circle cx="12" cy="19" r="1" fill="#fff"/></svg> Original Sound - Plately</span>
+                        {/* Bottom Text - Username and Caption */}
+                        <div className="absolute bottom-6 left-4 z-10 max-w-[80%]">
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-white text-base">paltely.restaurant</span>
+                            <span className="text-white/80 text-sm">Plately Restaurant</span>
+                          </div>
+                          <p className="text-white text-sm mt-1 leading-tight">Weekend vibes call for our signature Cheddar Bacon Smash Burger. Crispy edges, melty cheese, and thick-cut bacon - pure weekend perfection.</p>
                         </div>
                         
-                        {/* Bottom Right: Actions */}
-                        <div className="absolute bottom-4 right-2 z-10 flex flex-col items-center gap-3">
-                          {/* Avatar */}
-                          <div className="w-8 h-8 rounded-full border-2 border-white bg-gray-300"></div>
-                          {/* Like */}
-                          <div className="flex flex-col items-center">
-                            <svg width="24" height="24" fill="#fff" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="white" strokeWidth="2"/></svg>
-                            <span className="text-xs font-bold text-white">1.3M</span>
+                        {/* Right Side Actions */}
+                        <div className="absolute right-4 bottom-8 z-10 flex flex-col items-center gap-6">
+                          {/* Profile Picture */}
+                          <div className="flex flex-col items-center gap-1">
+                            <div className="w-12 h-12 rounded-full border-2 border-white overflow-hidden">
+                              <div className="w-full h-full bg-gray-400 rounded-full"></div>
+                            </div>
+                            <div className="w-6 h-6 -mt-3 bg-pink-500 rounded-full flex items-center justify-center border-2 border-white">
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                              </svg>
+                            </div>
                           </div>
-                          {/* Comment */}
-                          <div className="flex flex-col items-center">
-                            <svg width="24" height="24" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                            <span className="text-xs font-bold text-white">10.7K</span>
+                          
+                          {/* Like Heart */}
+                          <div className="flex flex-col items-center gap-1">
+                            <div className="p-2 bg-black/30 rounded-full">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                              </svg>
+                            </div>
+                            <span className="text-white text-xs font-semibold drop-shadow">1.4M</span>
                           </div>
+                          
+                          {/* Comments */}
+                          <div className="flex flex-col items-center gap-1">
+                            <div className="p-2 bg-black/30 rounded-full">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 27 26">
+                                <path fill="#fff" fillRule="evenodd" d="M27 11.5c0 .427-.027.848-.08 1.262-.405 4.328-4.21 10.093-12.263 13.01a.491.491 0 0 1-.657-.466v-2.314a15.96 15.96 0 0 1-.5.008C6.044 23 0 17.851 0 11.5S6.044 0 13.5 0 27 5.149 27 11.5ZM8 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm6 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm8-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" clipRule="evenodd"/>
+                              </svg>
+                            </div>
+                            <span className="text-white text-xs font-semibold drop-shadow">7.4K</span>
+                          </div>
+                          
+                          {/* Bookmark */}
+                          <div className="flex flex-col items-center gap-1">
+                            <div className="p-2 bg-black/30 rounded-full">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                                <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+                              </svg>
+                            </div>
+                            <span className="text-white text-xs font-semibold drop-shadow">46.8K</span>
+                          </div>
+                          
                           {/* Share */}
-                          <div className="flex flex-col items-center">
-                            <svg width="24" height="24" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
-                            <span className="text-xs font-bold text-white">30.9K</span>
+                          <div className="flex flex-col items-center gap-1">
+                            <div className="p-2 bg-black/30 rounded-full">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 27 26">
+                                <path fill="#fff" d="M12.912 1.002c0-.891 1.078-1.337 1.707-.707L25.5 11.174a2 2 0 0 1 0 2.828L14.618 24.88c-.63.63-1.706.183-1.707-.707v-5.929c-6.66 0-9.698 1.84-11.341 3.436-.65.631-1.636.279-1.568-.625.824-10.97 7.093-13.563 12.91-14.468V1.002Z"/>
+                              </svg>
+                            </div>
+                            <span className="text-white text-xs font-semibold drop-shadow">43K</span>
+                          </div>
+                          
+                          {/* Music Record */}
+                          <div className="flex flex-col items-center gap-1">
+                            <div className="p-2 bg-black/30 rounded-full">
+                              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center animate-spin-slow">
+                                <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>

@@ -11,6 +11,8 @@
     "build:no-type-check": "next build"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
+    "@heroicons/react": "^2.2.0",
     "@payloadcms/bundler-webpack": "^1.0.7",
     "@payloadcms/db-postgres": "^0.2.3",
     "@payloadcms/richtext-slate": "^1.5.2",

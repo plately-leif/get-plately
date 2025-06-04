@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
@@ -25,23 +26,21 @@ const Footer: React.FC = () => {
             <a href="/signin" className="text-sm text-white/80 hover:text-white">Login</a>
           </div>
           <div className="flex flex-col gap-2 min-w-[100px]">
-            <span className="font-semibold text-base">Company</span>
-            <a href="#about" className="text-sm text-white/80 hover:text-white">About</a>
-            <a href="#blog" className="text-sm text-white/80 hover:text-white">Blog</a>
+            <span className="font-semibold text-base">Support</span>
+            <Link href="/contact" className="text-sm text-white/80 hover:text-white">Contact Us</Link>
           </div>
           <div className="flex flex-col gap-2 min-w-[100px]">
-            <span className="font-semibold text-base">Support</span>
-            <a href="#help" className="text-sm text-white/80 hover:text-white">Help Center</a>
-            <a href="#contact" className="text-sm text-white/80 hover:text-white">Contact</a>
-            <a href="#status" className="text-sm text-white/80 hover:text-white">Status</a>
+            <span className="font-semibold text-base">Company</span>
+            <Link href="/about" className="text-sm text-white/80 hover:text-white">About</Link>
+            <a href="#blog" className="text-sm text-white/80 hover:text-white">Blog</a>
           </div>
         </div>
       </div>
       <div className="mt-12 pt-6 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4">
         <span className="text-xs text-white/60">© 2025 Plately. All rights reserved.</span>
         <div className="flex gap-4">
-          <a href="#privacy" className="text-xs text-white/60 hover:text-white">Privacy Policy</a>
-          <a href="#terms" className="text-xs text-white/60 hover:text-white">Terms of Service</a>
+          <Link href="/privacy-policy" className="text-xs text-white/60 hover:text-white">Privacy Policy</Link>
+          <Link href="/terms-of-service" className="text-xs text-white/60 hover:text-white">Terms of Service</Link>
         </div>
       </div>
     </footer>

@@ -37,6 +37,15 @@ export const metadata: Metadata = {
   creator: "Plately",
   publisher: "Plately",
   
+  // Icons and Favicon
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+
   // Open Graph / Facebook
   openGraph: {
     title: "Plately – AI Social-Media Marketing for Restaurants",
@@ -77,15 +86,6 @@ export const metadata: Metadata = {
     },
   },
   
-  // Icons
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-touch-icon.png',
-  },
-  
   // Theme color moved to viewport export
 };
 
@@ -110,7 +110,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        {/* Add any additional head elements here */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body className={`${inter.className} min-h-screen bg-white`}>
         {children}

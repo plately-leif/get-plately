@@ -21,7 +21,7 @@ const FinalCTA: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden">
+    <section id="final-cta" className="relative w-full overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 bg-accent">
         {/* Logo-inspired background elements */}
