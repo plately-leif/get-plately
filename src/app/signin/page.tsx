@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
 import Link from 'next/link';
 
-export default function SignIn() {
+// Wrap the component that uses useSearchParams in a separate component
+function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -23,6 +24,19 @@ export default function SignIn() {
       setMessage('You do not have permission to access this page. Please sign in with an admin account.');
     }
   }, [searchParams]);
+
+// Main component that wraps the form in a Suspense boundary
+export default function SignIn() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+      </div>
+    }>
+      <SignInForm />
+    </Suspense>
+  );
+}
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
