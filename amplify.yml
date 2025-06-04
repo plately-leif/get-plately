@@ -7,6 +7,9 @@ frontend:
     build:
       commands:
         - npm run build
+        # Delete SWC binaries after build to reduce size
+        - rm -f node_modules/@swc/core-linux-x64-gnu/swc.linux-x64-gnu.node
+        - rm -f node_modules/@swc/core-linux-x64-musl/swc.linux-x64-musl.node
   artifacts:
     baseDirectory: .next
     files:
