@@ -85,7 +85,7 @@ const Hero: React.FC = () => {
       {/* Right: Illustration */}
       <div className="flex-1 flex items-center justify-center scale-90">
         <Image
-          src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/Hero-Pasta-plately.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83MjFkNWFmMy04OTI0LTRjMWItYWE1YS02MzFkMWM4N2M3M2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9IZXJvLVBhc3RhLXBsYXRlbHkuanBnIiwiaWF0IjoxNzQ4OTM0MzM0LCJleHAiOjE3ODA0NzAzMzR9.nvXvuWWjn2GUIMx7JVUq_9VGXQcOoN_PfnKgXrsLuHM"
+          src="https://assets.getplately.com/assets/images/Hero-Pasta-plately.webp"
           alt="Bowl of basil-tomato linguine next to a generated social-media post, demonstrating Plately output"
           width={720}
           height={720}

@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col gap-4 max-w-xs">
           <div className="flex items-center gap-2">
             <Image
-              src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/platelyLogo_LightText.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9wbGF0ZWx5TG9nb19MaWdodFRleHQuc3ZnIiwiaWF0IjoxNzQ4NjQwMTYxLCJleHAiOjMzMjU0NDAxNjF9.fH2ROf7y4d7GPOHdXHvGRG62O_xTGjL_Anr5c3zFNyc"
+              src="https://assets.getplately.com/logos/Plately-logo-brand-white.svg"
               alt="Plately Logo Light"
               height={32}
               width={120}

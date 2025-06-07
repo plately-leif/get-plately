@@ -8,13 +8,13 @@ import { motion, AnimatePresence } from "framer-motion";
 const POST_TYPES = ["instagram", "facebook", "tiktok"];
 
 // Image constants
-const RESTAURANT_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/Restaurant-interior.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9SZXN0YXVyYW50LWludGVyaW9yLmpwZyIsImlhdCI6MTc0ODgwMTU1MiwiZXhwIjoxNzgwMzM3NTUyfQ.L-5carpWOdA-M7uCbHVEo_O8NrtpLPdS7Hq-PUYRvkw";
-const FOOD_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/burger.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9idXJnZXIuanBlZyIsImlhdCI6MTc0ODY3MzI2OSwiZXhwIjoxOTA2MzUzMjY5fQ.EryvkWF0ruvwsf6PVofVLctKRUDF06UYCdp_IpNHAsc";
+const RESTAURANT_IMG = "https://assets.getplately.com/assets/images/restaurant-interior.webp";
+const FOOD_IMG = "https://assets.getplately.com/assets/images/cheddar-bacon-hamburger.webp";
 
 // New carousel images for social media posts
-const INSTAGRAM_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/cheddar-bacon-hamburger-1.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83MjFkNWFmMy04OTI0LTRjMWItYWE1YS02MzFkMWM4N2M3M2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9jaGVkZGFyLWJhY29uLWhhbWJ1cmdlci0xLmpwZyIsImlhdCI6MTc0ODg5NTg5OCwiZXhwIjoxNzgwNDMxODk4fQ.2FVYkhMSToxnKvVH6Nqcpn77rAV-M2xVYpzZZsJg42I";
-const FACEBOOK_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/cheddar-bacon-hamburger-3.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83MjFkNWFmMy04OTI0LTRjMWItYWE1YS02MzFkMWM4N2M3M2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9jaGVkZGFyLWJhY29uLWhhbWJ1cmdlci0zLmpwZyIsImlhdCI6MTc0ODg5NTkzNCwiZXhwIjoxNzgwNDMxOTM0fQ.1U3HBA8-20cdaBX7qmLmzbJay8PH879TxZJ-qwJjX1k";
-const TIKTOK_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/cheddar-bacon-hamburger-2.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83MjFkNWFmMy04OTI0LTRjMWItYWE1YS02MzFkMWM4N2M3M2YiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9jaGVkZGFyLWJhY29uLWhhbWJ1cmdlci0yLmpwZyIsImlhdCI6MTc0ODg5NTk2MywiZXhwIjoxNzgwNDMxOTYzfQ.C0fj0QYWt3TqnGmpcqgQRqUGGTdJnfQRlE2XIpZFpqw";
+const INSTAGRAM_IMG = "https://assets.getplately.com/assets/images/cheddar-bacon-hamburger-daylight.webp";
+const FACEBOOK_IMG = "https://assets.getplately.com/assets/images/cheddar-bacon-hamburger-evening.webp";
+const TIKTOK_IMG = "https://assets.getplately.com/assets/images/cheddar-bacon-hamburger-highflash.webp";
 
 const ProcessDemoNew: React.FC = () => {
   const [currentPostType, setCurrentPostType] = useState(0);

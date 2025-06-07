@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
 
-const RESTAURANT_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/Restaurant-interior.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9SZXN0YXVyYW50LWludGVyaW9yLmpwZyIsImlhdCI6MTc0ODY3MjY4NCwiZXhwIjoxOTA2MzUyNjg0fQ.4SXA8eWaUj_UOCYtXkIDhLzS5zcLiL6Zi7cLs_aBpBY";
-const FOOD_IMG = "https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/burger.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9idXJnZXIuanBlZyIsImlhdCI6MTc0ODY3MzI2OSwiZXhwIjoxOTA2MzUzMjY5fQ.EryvkWF0ruvwsf6PVofVLctKRUDF06UYCdp_IpNHAsc";
+const RESTAURANT_IMG = "https://assets.getplately.com/assets/images/restaurant-interior.webp";
+const FOOD_IMG = "https://assets.getplately.com/assets/images/cheddar-bacon-hamburger.webp";
 
 const ProcessDemo: React.FC = () => {
   return (
@@ -25,7 +25,7 @@ const ProcessDemo: React.FC = () => {
           <span className="font-bold text-base text-[#111827] mb-1">Restaurant Photo</span>
           <div className="w-[312px] h-[219px] bg-gray-200 border-2 border-[#E5E7EB] rounded-xl flex items-center justify-center overflow-hidden relative">
             <Image
-              src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/Restaurant-interior.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9SZXN0YXVyYW50LWludGVyaW9yLmpwZyIsImlhdCI6MTc0ODgwMTU1MiwiZXhwIjoxNzgwMzM3NTUyfQ.L-5carpWOdA-M7uCbHVEo_O8NrtpLPdS7Hq-PUYRvkw"
+              src="https://assets.getplately.com/website-assets/Restaurant-interior.jpg"
               alt="Restaurant interior"
               fill
               style={{ objectFit: 'cover' }}
@@ -48,7 +48,7 @@ const ProcessDemo: React.FC = () => {
           <span className="font-bold text-base text-[#111827] mb-1">Food Photo</span>
           <div className="w-[312px] h-[219px] bg-gray-200 border-2 border-[#E5E7EB] rounded-xl flex items-center justify-center overflow-hidden relative">
             <Image
-              src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/burger.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9idXJnZXIuanBlZyIsImlhdCI6MTc0ODgwMTU3NywiZXhwIjoxNzgwMzM3NTc3fQ.P6Nr1b29C52sq1QPDrhirW7gtWXBymIYVdM3Bl8ugEo"
+              src="https://assets.getplately.com/website-assets/burger.jpeg"
               alt="Burger food photo"
               fill
               style={{ objectFit: 'cover' }}
@@ -112,7 +112,7 @@ const ProcessDemo: React.FC = () => {
           {/* Image Placeholder */}
           <div className="w-full h-[300px] sm:h-[360px] md:h-[420px] lg:h-[480px] relative overflow-hidden">
             <Image
-              src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/cheddar-bacon-hamburger-1.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9jaGVkZGFyLWJhY29uLWhhbWJ1cmdlci0xLmpwZyIsImlhdCI6MTc0ODY3ODU0NCwiZXhwIjoxOTA2MzU4NTQ0fQ.ls3f_id9yK7iWqIyOA_Vvefj5KFWfEMX9YwG5AjAPi8"
+              src="https://assets.getplately.com/website-assets/cheddar-bacon-hamburger-1.jpg"
               alt="Cheddar bacon hamburger Instagram post"
               fill
               style={{ objectFit: 'cover' }}
@@ -152,7 +152,7 @@ const ProcessDemo: React.FC = () => {
           {/* Image Placeholder */}
           <div className="w-full h-[300px] sm:h-[360px] md:h-[420px] lg:h-[480px] relative overflow-hidden">
             <Image
-              src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/cheddar-bacon-hamburger-3.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9jaGVkZGFyLWJhY29uLWhhbWJ1cmdlci0zLmpwZyIsImlhdCI6MTc0ODY3ODgyMywiZXhwIjoxOTA2MzU4ODIzfQ.jMGSRxJJ-vmcPQJavM4PlgKRevmXHO8GMsuIZ-yEW24"
+              src="https://assets.getplately.com/website-assets/cheddar-bacon-hamburger-3.jpg"
               alt="Cheddar bacon hamburger Facebook post"
               fill
               style={{ objectFit: 'cover' }}
@@ -189,7 +189,7 @@ const ProcessDemo: React.FC = () => {
           {/* TikTok Image/Video */}
           <div className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] relative overflow-hidden">
             <Image
-              src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/cheddar-bacon-hamburger-2.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9jaGVkZGFyLWJhY29uLWhhbWJ1cmdlci0yLmpwZyIsImlhdCI6MTc0ODY3OTA0NCwiZXhwIjoxOTA2MzU5MDQ0fQ.lIjHrFxI71a-X7WEsgn2GjYSCMo2znwxAZENf6kwZTM"
+              src="https://assets.getplately.com/website-assets/cheddar-bacon-hamburger-2.jpg"
               alt="Cheddar bacon hamburger TikTok post"
               fill
               style={{ objectFit: 'cover' }}

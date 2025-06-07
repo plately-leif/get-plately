@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
       {/* Left: Logo */}
       <div className="flex items-center gap-2">
         <Image
-          src="https://wiqdmiimlxxuhrvhhuxs.supabase.co/storage/v1/object/sign/website-assets/platelyLogo_DarkText.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InN0b3JhZ2UtdXJsLXNpZ25pbmcta2V5XzcyMWQ1YWYzLTg5MjQtNGMxYi1hYTVhLTYzMWQxYzg3YzczZiJ9.eyJ1cmwiOiJ3ZWJzaXRlLWFzc2V0cy9wbGF0ZWx5TG9nb19EYXJrVGV4dC5zdmciLCJpYXQiOjE3NDg2Mzk3MjksImV4cCI6MzMyNTQzOTcyOX0.W86_EYP17vu7UpI8174YAloCidL2lEdvgyy7pKYuZ9Q"
+          src="https://assets.getplately.com/logos/plately-logo.svg"
           alt="Plately Logo"
           height={48}
           width={160}
