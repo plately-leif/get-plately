@@ -1,18 +1,17 @@
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
-import { randomUUID } from 'crypto';
 
-// Load environment variables
-dotenv.config({ path: '.env.local' });
+dotenv.config();
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-  throw new Error('Missing required environment variables');
+  throw new Error('Missing required environment variables: NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set');
 }
 
-const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+// Initialize Supabase client with service role key
+const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
   auth: {
     autoRefreshToken: false,
     persistSession: false,
@@ -20,69 +19,97 @@ const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
 });
 
 async function setupAdminUser() {
-  const adminEmail = 'leif@platey.ai';
-  const adminPassword = process.env.ADMIN_PASSWORD || randomUUID();
+  const email = 'leif@platey.ai';
+  const password = process.env.ADMIN_PASSWORD || 'admin123'; // In production, always set ADMIN_PASSWORD
 
   try {
-    console.log('Creating admin user...');
+    console.log('🚀 Setting up admin user...');
     
-    // Create auth user
-    const { data: authData, error: authError } = await supabaseAdmin.auth.admin.createUser({
-      email: adminEmail,
-      password: adminPassword,
-      email_confirm: true,
-      user_metadata: { name: 'Admin User' },
-    });
+    // 1. Check if user exists in auth.users
+    console.log('🔍 Checking for existing user...');
+    const { data: { users }, error: listUsersError } = await supabase.auth.admin.listUsers();
+    if (listUsersError) throw listUsersError;
+    
+    const existingUser = users.find(user => user.email === email);
+    let userId = existingUser?.id;
 
-    if (authError) {
-      if (authError.message.includes('already registered')) {
-        console.log('Admin user already exists. Updating role...');
-        
-        // Get existing user
-        const { data: existingUser } = await supabaseAdmin
-          .from('users')
-          .select('id')
-          .eq('email', adminEmail)
-          .single();
-        
-        if (existingUser) {
-          // Update role to admin
-          const { error: updateError } = await supabaseAdmin
-            .from('users')
-            .update({ role: 'admin' })
-            .eq('email', adminEmail);
-          
-          if (updateError) throw updateError;
-          
-          console.log('Admin role updated successfully');
-          return;
+    // 2. Create or update auth user
+    if (!existingUser) {
+      console.log('👤 Creating new admin user in auth.users...');
+      const { data: authData, error: signUpError } = await supabase.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: true,
+        user_metadata: { name: 'Leif' },
+      });
+      
+      if (signUpError) throw signUpError;
+      if (!authData.user) throw new Error('Failed to create user');
+      
+      userId = authData.user.id;
+      console.log('✅ Created auth user with ID:', userId);
+    } else {
+      userId = existingUser.id;
+      console.log('ℹ️  User already exists in auth.users, ID:', userId);
+      
+      // Update password if ADMIN_PASSWORD is set
+      if (process.env.ADMIN_PASSWORD) {
+        console.log('🔄 Updating password...');
+        const { error: updateError } = await supabase.auth.admin.updateUserById(userId, {
+          password: process.env.ADMIN_PASSWORD,
+        });
+        if (updateError) {
+          console.warn('⚠️  Could not update password:', updateError.message);
+        } else {
+          console.log('✅ Password updated');
         }
       }
-      throw authError;
     }
 
-    // Create user in public.users table
-    const { error: userError } = await supabaseAdmin
+    if (!userId) {
+      throw new Error('No user ID available after auth setup');
+    }
+
+    // 3. Ensure user exists in public.users
+    console.log('👥 Ensuring user in public.users...');
+    const { error: profileError } = await supabase
       .from('users')
-      .insert([
+      .upsert(
         {
-          id: authData.user.id,
-          email: adminEmail,
-          name: 'Admin User',
+          id: userId,
+          email,
+          name: 'Leif',
           role: 'admin',
         },
-      ]);
+        { onConflict: 'id' }
+      );
 
-    if (userError) throw userError;
+    if (profileError) throw profileError;
 
-    console.log('Admin user created successfully!');
-    console.log(`Email: ${adminEmail}`);
-    console.log(`Password: ${adminPassword}`);
-    console.log('\nIMPORTANT: Save this password in a secure place!');
+    // 4. Output success message
+    console.log('\n🎉 Admin user setup completed successfully!');
+    console.log('======================================');
+    console.log(`🔑 Email: ${email}`);
+    console.log(`🔑 Password: ${process.env.ADMIN_PASSWORD ? '*** (set in .env)' : password}`);
+    console.log('======================================');
+    console.log('\n⚠️  IMPORTANT: Change the password after first login!');
+    console.log('⚠️  Run this command to open the login page:');
+    console.log('    open http://localhost:3000/payload-admin');
   } catch (error) {
-    console.error('Error setting up admin user:', error);
+    console.error('❌ Error setting up admin user:');
+    if (error instanceof Error) {
+      console.error(error.message);
+      if (error.stack) {
+        console.error(error.stack);
+      }
+    } else {
+      console.error(error);
+    }
     process.exit(1);
   }
 }
 
-setupAdminUser();
+// Run the setup
+setupAdminUser()
+  .then(() => process.exit(0))
+  .catch(() => process.exit(1));
