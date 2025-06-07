@@ -11,66 +11,110 @@ import AdminDashboard from './components/AdminDashboard';
 
 import { BlogPost } from './collections/BlogPost';
 import { Media } from './collections/Media';
+import { Users } from './collections/Users';
 import { Waitlist } from './collections/Waitlist';
 import { customEndpoints } from './endpoints';
 
 // Create a custom auth strategy that works with Supabase
 const createSupabaseAuth = () => {
+  const ensureUserInPayload = async (supabaseUser: any) => {
+    if (!supabaseUser?.id) return null;
+
+    const supabase = createServerClient();
+    
+    // Check if user exists in Payload
+    const { data: existingUser } = await supabase
+      .from('users')
+      .select('id, role')
+      .eq('id', supabaseUser.id)
+      .single();
+
+    // If user doesn't exist, create them
+    if (!existingUser) {
+      const { data: newUser } = await supabase
+        .from('users')
+        .insert([
+          {
+            id: supabaseUser.id,
+            email: supabaseUser.email,
+            name: supabaseUser.email.split('@')[0], // Default name from email
+            role: 'user', // Default role
+          },
+        ])
+        .select()
+        .single();
+      
+      return newUser;
+    }
+
+    return existingUser;
+  };
+
   const authenticate = async (email: string, password: string) => {
     const supabase = createServerClient();
     
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      // Sign in with Supabase
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
-      throw new Error('Invalid credentials');
+      if (error || !data.user) {
+        throw new Error('Invalid credentials');
+      }
+
+      // Ensure user exists in Payload
+      const user = await ensureUserInPayload(data.user);
+      if (!user) {
+        throw new Error('Failed to authenticate user');
+      }
+
+      // For admin access, check if user has admin role
+      if (user.role !== 'admin') {
+        throw new Error('Access denied. Admin privileges required.');
+      }
+
+      return {
+        id: data.user.id,
+        email: data.user.email || '',
+      };
+    } catch (error) {
+      console.error('Authentication error:', error);
+      throw error;
     }
-
-    // Check if user has admin role
-    const { data: userData, error: userError } = await supabase
-      .from('users')
-      .select('role')
-      .eq('email', email)
-      .single();
-
-    if (userError || userData?.role !== 'admin') {
-      await supabase.auth.signOut();
-      throw new Error('Access denied. Admin privileges required.');
-    }
-
-    return {
-      id: data.user?.id || '',
-      email: data.user?.email || '',
-    };
   };
 
   const verify = async ({ req }: { req: any }) => {
     const supabase = createServerClient();
     
-    const { data: { session } } = await supabase.auth.getSession();
-    
-    if (!session) {
-      throw new Error('Not authenticated');
+    try {
+      // Get the current session
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      
+      if (sessionError || !session) {
+        throw new Error('Not authenticated');
+      }
+
+      // Ensure user exists in Payload
+      const user = await ensureUserInPayload(session.user);
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      // For admin access, check if user has admin role
+      if (user.role !== 'admin') {
+        throw new Error('Access denied. Admin privileges required.');
+      }
+
+      return {
+        id: session.user.id,
+        email: session.user.email || '',
+      };
+    } catch (error) {
+      console.error('Verification error:', error);
+      throw error;
     }
-
-    // Check if user has admin role
-    const { data: userData, error } = await supabase
-      .from('users')
-      .select('role')
-      .eq('id', session.user.id)
-      .single();
-
-    if (error || userData?.role !== 'admin') {
-      await supabase.auth.signOut();
-      throw new Error('Access denied. Admin privileges required.');
-    }
-
-    return {
-      id: session.user.id,
-      email: session.user.email || '',
-    };
   };
 
   return {
@@ -81,7 +125,7 @@ const createSupabaseAuth = () => {
     cookies: {
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax' as const,
-      domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
+      domain: process.env.NODE_ENV === 'production' ? '.getplately.com' : undefined,
     },
     authenticate,
     verify,
@@ -92,6 +136,7 @@ const createSupabaseAuth = () => {
 const config = buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
   collections: [
+    Users,
     BlogPost,
     Media,
     Waitlist,
