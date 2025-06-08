@@ -152,50 +152,82 @@ function updateTsConfig() {
 function updateNextConfig() {
   console.log('🔧 Updating Next.js configuration...');
   
-  const configPath = path.join(process.cwd(), 'next.config.js');
-  if (fs.existsSync(configPath)) {
-    try {
-      // Read the file but don't parse it as JSON since it's JavaScript
-      let configContent = fs.readFileSync(configPath, 'utf8');
+  try {
+    const nextConfigPath = path.join(process.cwd(), 'next.config.js');
+    if (fs.existsSync(nextConfigPath)) {
+      const content = fs.readFileSync(nextConfigPath, 'utf8');
       
       // Create a backup
-      fs.writeFileSync(`${configPath}.backup`, configContent);
+      fs.writeFileSync(`${nextConfigPath}.backup`, content);
       
-      // Add or update typescript configuration
-      if (!configContent.includes('typescript: {')) {
-        configContent = configContent.replace(
-          'const nextConfig = {',
-          'const nextConfig = {\n  // Disable TypeScript type checking during build\n  typescript: {\n    ignoreBuildErrors: true,\n  },'
-        );
+      // Check if the configuration already has the required settings
+      let needsUpdate = false;
+      
+      if (!content.includes('missingSuspenseWithCSRBailout: false')) {
+        needsUpdate = true;
       }
       
-      // Add or update output configuration
-      if (!configContent.includes('output:')) {
-        configContent = configContent.replace(
-          'const nextConfig = {',
-          'const nextConfig = {\n  // For Amplify deployment\n  output: \'standalone\','
-        );
+      if (!content.includes('output: \'standalone\'')) {
+        needsUpdate = true;
       }
       
-      // Add or update experimental configuration
-      if (!configContent.includes('experimental: {')) {
-        configContent = configContent.replace(
-          'const nextConfig = {',
-          'const nextConfig = {\n  // Experimental features\n  experimental: {\n    // Disable CSR bailout errors\n    missingSuspenseWithCSRBailout: false,\n  },'
-        );
-      } else if (!configContent.includes('missingSuspenseWithCSRBailout')) {
-        // Add missingSuspenseWithCSRBailout to existing experimental config
-        configContent = configContent.replace(
-          'experimental: {',
-          'experimental: {\n    // Disable CSR bailout errors\n    missingSuspenseWithCSRBailout: false,'
-        );
+      if (!content.includes('runtime: \'nodejs\'')) {
+        needsUpdate = true;
       }
       
-      fs.writeFileSync(configPath, configContent);
-      console.log('✅ next.config.js updated successfully');
-    } catch (error) {
-      console.error('❌ Error updating next.config.js:', error.message);
+      if (needsUpdate) {
+        // Add the experimental configuration
+        let updatedContent = content;
+        
+        // Ensure we have the proper experimental section for AWS Amplify
+        const experimentalConfig = `
+  // Experimental features
+  experimental: {
+    // Disable CSR bailout errors
+    missingSuspenseWithCSRBailout: false,
+    // Disable server components for better compatibility with Amplify
+    serverComponents: false,
+    // Improve compatibility with Amplify
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+    // Disable Edge runtime as it's not supported by Amplify
+    runtime: 'nodejs',
+  },`;
+        
+        // Check if there's an existing experimental section to replace
+        if (updatedContent.includes('experimental: {')) {
+          // Replace existing experimental section
+          updatedContent = updatedContent.replace(
+            /experimental:\s*\{[^}]*\}/s,
+            experimentalConfig.trim()
+          );
+        } else {
+          // Add new experimental section after nextConfig declaration
+          updatedContent = updatedContent.replace(
+            /const nextConfig = \{/,
+            `const nextConfig = {${experimentalConfig}`
+          );
+        }
+        
+        // Ensure output is set to standalone for AWS Amplify
+        if (!updatedContent.includes('output: \'standalone\'')) {
+          updatedContent = updatedContent.replace(
+            /const nextConfig = \{/,
+            'const nextConfig = {\n  // For Amplify deployment\n  output: \'standalone\',\n  trailingSlash: true,\n  swcMinify: true,\n  compress: true,'
+          );
+        }
+        
+        fs.writeFileSync(nextConfigPath, updatedContent);
+        console.log('✅ next.config.js updated successfully with AWS Amplify optimizations');
+      } else {
+        console.log('✅ next.config.js already has all required AWS Amplify settings');
+      }
+    } else {
+      console.error('❌ next.config.js not found');
     }
+  } catch (error) {
+    console.error('❌ Error updating next.config.js:', error.message);
   }
 }
 

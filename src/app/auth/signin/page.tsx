@@ -65,7 +65,7 @@ function SignInForm() {
       if (error) throw error;
 
       // Redirect to the original requested URL or default to admin dashboard
-      const redirectTo = searchParams?.get('redirectedFrom') || '/admin';
+      const redirectTo = searchParams?.get('redirectTo') || searchParams?.get('redirectedFrom') || '/admin/dashboard';
       router.push(redirectTo);
       router.refresh();
     } catch (error: any) {

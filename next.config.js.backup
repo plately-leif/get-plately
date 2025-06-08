@@ -1,16 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Experimental features
-  experimental: {
-    // Disable CSR bailout errors
-    missingSuspenseWithCSRBailout: false,
-    // Disable server components for better compatibility with Amplify
-    serverComponents: false,
-    // Improve compatibility with Amplify
-    serverActions: {
-      bodySizeLimit: '2mb',
-    },
-  },
   // Environment variables configuration
   env: {
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -29,10 +18,23 @@ const nextConfig = {
   // Disable source maps in production for better performance
   productionBrowserSourceMaps: false,
   // For Amplify deployment
-  output: 'standalone',
-  trailingSlash: true,
-  swcMinify: true,
-  compress: true,
+  output: 'standalone', // Required for AWS Amplify SSR deployment
+  trailingSlash: true,  // Helps with routing consistency
+  swcMinify: true,      // Optimizes bundle size
+  compress: true,       // Enables gzip compression
+  // Disable Edge API routes as they're not supported by Amplify
+  experimental: {
+    // Disable CSR bailout errors
+    missingSuspenseWithCSRBailout: false,
+    // Disable server components for better compatibility with Amplify
+    serverComponents: false,
+    // Improve compatibility with Amplify
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+    // Disable Edge runtime as it's not supported by Amplify
+    runtime: 'nodejs',
+  },
   // Enable React strict mode
   reactStrictMode: true,
   // Configure images
