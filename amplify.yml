@@ -17,8 +17,10 @@ frontend:
             echo "Error: NEXT_PUBLIC_SUPABASE_ANON_KEY is not set"
             exit 1
           fi
-        # Install dependencies
+        # Install dependencies with explicit TypeScript types
         - npm install --production=false
+        - npm install --save-dev @types/react@18.2.0 @types/react-dom@18.2.0
+        - node scripts/ensure-types.js
     build:
       commands:
         - npm run build

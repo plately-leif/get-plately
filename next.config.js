@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Experimental features
+  experimental: {
+    // Disable server components for better compatibility
+    serverComponents: false,
+  },
   // Disable TypeScript type checking during build
   typescript: {
     ignoreBuildErrors: true,
