@@ -160,9 +160,12 @@ const config = buildConfig({
   routes: {
     admin: '/payload-admin',
   },
+  // Use Supabase for data storage instead of direct database connection
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      connectionString: process.env.NEXT_PUBLIC_SUPABASE_URL ? 
+        `postgresql://postgres:postgres@${process.env.NEXT_PUBLIC_SUPABASE_URL.replace('https://', '')}/postgres` :
+        'postgresql://postgres:postgres@localhost:54322/postgres',
     },
   }),
   editor: slateEditor({}),
