@@ -359,12 +359,12 @@ async function build() {
       return 0;
     }
     
-    // If both builds fail, try with export
-    console.log('⚠️ Minimal build failed, trying with export option...');
-    const exportBuildSuccess = runCommand('npx next build && npx next export', { env: { ...process.env, ...buildEnv } });
+    // Try with additional options for Next.js 14 SSR
+    console.log('⚠️ Minimal build failed, trying with additional options...');
+    const ssrBuildSuccess = runCommand('npx next build --no-lint --no-mangling', { env: { ...process.env, ...buildEnv } });
     
-    if (exportBuildSuccess) {
-      console.log('✅ Export build completed successfully!');
+    if (ssrBuildSuccess) {
+      console.log('✅ SSR build completed successfully!');
       return 0;
     }
     

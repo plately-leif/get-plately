@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/next-build.js",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "build:no-type-check": "cross-env NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max_old_space_size=4096 SKIP_TYPE_CHECK=true next build",
+    "build:no-type-check": "NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max_old_space_size=4096 SKIP_TYPE_CHECK=true next build",
     "setup:admin": "ts-node --project tsconfig.scripts.json scripts/setup-admin-user.ts",
     "amplify:build": "node scripts/amplify-build.js",
     "verify:build": "node scripts/verify-build.js"
