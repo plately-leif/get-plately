@@ -27,6 +27,7 @@
     "framer-motion": "^12.15.0",
     "lucide-react": "^0.513.0",
     "next": "^14.0.0",
+    "node-fetch": "^2.7.0",
     "payload": "^2.32.3",
     "pg": "^8.16.0",
     "react": "^18.2.0",

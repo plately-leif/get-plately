@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-8 md:gap-16">
           <div className="flex flex-col gap-2 min-w-[100px]">
             <span className="font-semibold text-base">Product</span>
-            <a href="/signin" className="text-sm text-white/80 hover:text-white">Login</a>
+            <Link href="/auth/signin" className="text-sm text-white/80 hover:text-white">Login</Link>
           </div>
           <div className="flex flex-col gap-2 min-w-[100px]">
             <span className="font-semibold text-base">Support</span>

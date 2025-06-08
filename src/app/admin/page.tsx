@@ -12,27 +12,24 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { user }, error } = await supabase.auth.getUser();
       
-      if (!session) {
-        router.push('/signin');
+      if (error || !user) {
+        // Redirect to auth/signin with the current path to return to after login
+        // Using a full URL to ensure consistent behavior
+        const redirectTo = new URL('/auth/signin', window.location.origin);
+        redirectTo.searchParams.set('redirectedFrom', '/admin');
+        window.location.href = redirectTo.toString();
         return;
       }
 
-      // Get user data
-      const { data: userData } = await supabase
-        .from('users')
-        .select('*')
-        .eq('id', session.user.id)
-        .single();
-
-      if (!userData || userData.role !== 'admin') {
-        await supabase.auth.signOut();
-        router.push('/signin');
-        return;
-      }
-
-      setUser(userData);
+      // Set the user data from auth
+      setUser({
+        id: user.id,
+        email: user.email,
+        ...user.user_metadata
+      });
+      
       setLoading(false);
     };
 
@@ -92,7 +89,7 @@ export default function AdminDashboard() {
                 <button
                   onClick={async () => {
                     await supabase.auth.signOut();
-                    router.push('/signin');
+                    router.push('/auth/signin');
                     router.refresh();
                   }}
                   className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md"

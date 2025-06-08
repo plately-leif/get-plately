@@ -16,13 +16,13 @@ function SignInForm() {
   const searchParams = useSearchParams();
   const supabase = createClient();
 
-  // Check for error messages in URL
+  // Check for error messages and redirect URL
   useEffect(() => {
     const error = searchParams?.get('error');
     const message = searchParams?.get('message');
     
     if (error === 'unauthorized' || message === 'unauthorized') {
-      setMessage('You do not have permission to access this page. Please sign in with an admin account.');
+      setMessage('You need to be signed in to access that page.');
     }
   }, [searchParams]);
 
@@ -39,8 +39,9 @@ function SignInForm() {
 
       if (error) throw error;
 
-      // Redirect to admin dashboard after successful sign in
-      router.push('/admin/dashboard');
+      // Redirect to the original requested URL or default to admin dashboard
+      const redirectTo = searchParams?.get('redirectedFrom') || '/admin';
+      router.push(redirectTo);
       router.refresh();
     } catch (error: any) {
       setMessage(error.error_description || error.message || 'An error occurred during sign in');
@@ -94,7 +95,7 @@ function SignInForm() {
                     Password
                   </label>
                   <Link
-                    href="/forgot-password"
+                    href="/auth/forgot-password"
                     className="text-sm font-medium text-accent hover:text-primary transition-colors"
                   >
                     Forgot password?
