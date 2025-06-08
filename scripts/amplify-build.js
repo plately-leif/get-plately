@@ -53,6 +53,46 @@ function installDependencies() {
   // Install TypeScript types
   runCommand('npm install --save-dev @types/react@18.2.0 @types/react-dom@18.2.0');
   
+  // Install missing dependencies from error logs
+  console.log('📦 Installing missing dependencies...');
+  const missingDeps = [
+    'diff@4.0.2',
+    'make-error@1.3.6',
+    'v8-compile-cache-lib@3.0.1',
+    'yn@3.1.1',
+    '@jridgewell/trace-mapping@0.3.9',
+    '@floating-ui/react@0.26.28',
+    'domutils@3.2.2',
+    'entities@4.5.0',
+    '@floating-ui/react-dom@2.1.3',
+    'tabbable@6.2.0'
+  ];
+  
+  // Install each missing dependency individually
+  for (const dep of missingDeps) {
+    console.log(`Installing ${dep}...`);
+    runCommand(`npm install --no-save ${dep}`);
+  }
+  
+  // Verify package-lock.json integrity
+  console.log('🔍 Verifying package-lock.json integrity...');
+  try {
+    // Create a backup of package-lock.json
+    if (fs.existsSync(path.join(process.cwd(), 'package-lock.json'))) {
+      fs.copyFileSync(
+        path.join(process.cwd(), 'package-lock.json'),
+        path.join(process.cwd(), 'package-lock.json.backup')
+      );
+      console.log('✅ Created backup of package-lock.json');
+    }
+    
+    // Regenerate package-lock.json if needed
+    runCommand('npm install --package-lock-only');
+    console.log('✅ Regenerated package-lock.json');
+  } catch (error) {
+    console.error('❌ Error updating package-lock.json:', error.message);
+  }
+  
   // Check if node_modules/@types/react exists
   const reactTypesPath = path.join(process.cwd(), 'node_modules', '@types', 'react');
   const reactDomTypesPath = path.join(process.cwd(), 'node_modules', '@types', 'react-dom');
@@ -185,45 +225,55 @@ function createNextDirectory() {
 function fixBuildIssues() {
   console.log('🔍 Checking for common build issues...');
 
-  // Check for useSearchParams without Suspense boundary
-  const authUpdatePasswordPath = path.join(process.cwd(), 'src', 'app', 'auth', 'update-password', 'page.tsx');
-  if (fs.existsSync(authUpdatePasswordPath)) {
-    try {
-      const content = fs.readFileSync(authUpdatePasswordPath, 'utf8');
-      
-      // Check if the file uses useSearchParams but doesn't have Suspense
-      if (content.includes('useSearchParams') && !content.includes('<Suspense')) {
-        console.log('⚠️ Found useSearchParams without Suspense in update-password page');
-        console.log('🔧 Adding Suspense boundary to fix build error...');
+  // Pages that need to be checked for useSearchParams without Suspense
+  const pagesToCheck = [
+    { path: path.join(process.cwd(), 'src', 'app', 'auth', 'update-password', 'page.tsx'), name: 'update-password' },
+    { path: path.join(process.cwd(), 'src', 'app', 'auth', 'signin', 'page.tsx'), name: 'signin' },
+    { path: path.join(process.cwd(), 'src', 'app', 'admin', 'login', 'page.tsx'), name: 'admin-login' }
+  ];
+
+  // Check each page for useSearchParams without Suspense
+  for (const page of pagesToCheck) {
+    if (fs.existsSync(page.path)) {
+      try {
+        const content = fs.readFileSync(page.path, 'utf8');
         
-        // Create a backup
-        fs.writeFileSync(`${authUpdatePasswordPath}.backup`, content);
-        
-        // Check if the file already imports Suspense
-        let updatedContent = content;
-        if (!content.includes('import { Suspense }') && !content.includes('import {Suspense}')) {
-          if (content.includes('import { useState, useEffect }')) {
-            updatedContent = content.replace(
-              'import { useState, useEffect }',
-              'import { useState, useEffect, Suspense }'
-            );
-          } else if (content.includes('import {')) {
-            updatedContent = content.replace(
-              /import \{([^}]*)\}/,
-              (match, imports) => `import {${imports}, Suspense}`
-            );
-          } else {
-            updatedContent = `import { Suspense } from 'react';\n${content}`;
+        // Check if the file uses useSearchParams but doesn't have Suspense
+        if (content.includes('useSearchParams') && !content.includes('<Suspense')) {
+          console.log(`⚠️ Found useSearchParams without Suspense in ${page.name} page`);
+          console.log(`🔧 Adding Suspense boundary to fix build error in ${page.name} page...`);
+          
+          // Create a backup
+          fs.writeFileSync(`${page.path}.backup`, content);
+          
+          // Check if the file already imports Suspense
+          let updatedContent = content;
+          if (!content.includes('import { Suspense }') && !content.includes('import {Suspense}')) {
+            if (content.includes('import { useState, useEffect }')) {
+              updatedContent = content.replace(
+                'import { useState, useEffect }',
+                'import { useState, useEffect, Suspense }'
+              );
+            } else if (content.includes('import {')) {
+              updatedContent = content.replace(
+                /import \{([^}]*)\}/,
+                (match, imports) => `import {${imports}, Suspense}`
+              );
+            } else {
+              updatedContent = `import { Suspense } from 'react';\n${content}`;
+            }
           }
+          
+          fs.writeFileSync(page.path, updatedContent);
+          console.log(`✅ Added Suspense import to ${page.name} page`);
         }
-        
-        fs.writeFileSync(authUpdatePasswordPath, updatedContent);
-        console.log('✅ Added Suspense import to update-password page');
+      } catch (error) {
+        console.error(`❌ Error checking/fixing ${page.name} page:`, error.message);
       }
-    } catch (error) {
-      console.error('❌ Error checking/fixing update-password page:', error.message);
     }
   }
+  
+  // Add more build issue fixes here as needed
 }
 
 // Main build process
@@ -234,6 +284,10 @@ async function build() {
     
     // Install dependencies
     installDependencies();
+    
+    // Install cross-env if not already installed
+    console.log('📦 Ensuring cross-env is installed...');
+    runCommand('npm install --save-dev cross-env');
     
     // Update TypeScript configuration
     updateTsConfig();
@@ -247,9 +301,17 @@ async function build() {
     // Create .next directory structure
     createNextDirectory();
     
+    // Set environment variables directly instead of using cross-env
+    const buildEnv = {
+      NODE_ENV: 'production',
+      SKIP_TYPE_CHECK: 'true',
+      NEXT_TELEMETRY_DISABLED: '1',
+      NODE_OPTIONS: '--max_old_space_size=4096'
+    };
+    
     // Run the build with all optimizations
     console.log('🔨 Starting Next.js build...');
-    const buildSuccess = runCommand('cross-env NODE_ENV=production SKIP_TYPE_CHECK=true NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max_old_space_size=4096 npx next build');
+    const buildSuccess = runCommand('npx next build', { env: { ...process.env, ...buildEnv } });
     
     if (buildSuccess) {
       console.log('✅ Build completed successfully!');
@@ -258,7 +320,7 @@ async function build() {
     
     // If the standard build fails, try the minimal build
     console.log('⚠️ Standard build failed, trying minimal build...');
-    const minimalBuildSuccess = runCommand('cross-env NODE_ENV=production SKIP_TYPE_CHECK=true NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max_old_space_size=4096 npx next build --no-lint');
+    const minimalBuildSuccess = runCommand('npx next build --no-lint', { env: { ...process.env, ...buildEnv } });
     
     if (minimalBuildSuccess) {
       console.log('✅ Minimal build completed successfully!');
@@ -267,7 +329,7 @@ async function build() {
     
     // If both builds fail, try with export
     console.log('⚠️ Minimal build failed, trying with export option...');
-    const exportBuildSuccess = runCommand('cross-env NODE_ENV=production SKIP_TYPE_CHECK=true NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max_old_space_size=4096 npx next build && npx next export');
+    const exportBuildSuccess = runCommand('npx next build && npx next export', { env: { ...process.env, ...buildEnv } });
     
     if (exportBuildSuccess) {
       console.log('✅ Export build completed successfully!');
