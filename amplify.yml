@@ -3,13 +3,25 @@ frontend:
   phases:
     preBuild:
       commands:
+        # Print environment info for debugging (excluding secrets)
+        - echo "Node version $(node -v)"
+        - echo "NPM version $(npm -v)"
+        # Verify required environment variables
+        - |
+          if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ]; then
+            echo "Error: NEXT_PUBLIC_SUPABASE_URL is not set"
+            exit 1
+          fi
+        - |
+          if [ -z "$NEXT_PUBLIC_SUPABASE_ANON_KEY" ]; then
+            echo "Error: NEXT_PUBLIC_SUPABASE_ANON_KEY is not set"
+            exit 1
+          fi
+        # Install dependencies
         - npm install --production=false
     build:
       commands:
         - npm run build
-        # Delete SWC binaries after build to reduce size
-        - rm -f node_modules/@swc/core-linux-x64-gnu/swc.linux-x64-gnu.node
-        - rm -f node_modules/@swc/core-linux-x64-musl/swc.linux-x64-musl.node
   artifacts:
     baseDirectory: .next
     files:
