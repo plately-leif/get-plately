@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
+
 const nextConfig = {
   // Environment variables configuration
   env: {
@@ -37,6 +39,13 @@ const nextConfig = {
   },
   // Enable React strict mode
   reactStrictMode: true,
+  
+  // Add webpack configuration for path aliases
+  webpack: (config, { isServer }) => {
+    // Add alias for @ to point to src directory
+    config.resolve.alias['@'] = path.join(process.cwd(), 'src');
+    return config;
+  },
   // Configure images
   images: {
     domains: [

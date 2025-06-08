@@ -257,6 +257,9 @@ function createNextDirectory() {
 function fixBuildIssues() {
   console.log('🔍 Checking for common build issues...');
 
+  // Fix path alias resolution issues
+  fixPathAliasIssues();
+
   // Pages that need to be checked for useSearchParams without Suspense
   const pagesToCheck = [
     { path: path.join(process.cwd(), 'src', 'app', 'auth', 'update-password', 'page.tsx'), name: 'update-password' },
@@ -269,15 +272,15 @@ function fixBuildIssues() {
     if (fs.existsSync(page.path)) {
       try {
         const content = fs.readFileSync(page.path, 'utf8');
-        
+
         // Check if the file uses useSearchParams but doesn't have Suspense
         if (content.includes('useSearchParams') && !content.includes('<Suspense')) {
           console.log(`⚠️ Found useSearchParams without Suspense in ${page.name} page`);
           console.log(`🔧 Adding Suspense boundary to fix build error in ${page.name} page...`);
-          
+
           // Create a backup
           fs.writeFileSync(`${page.path}.backup`, content);
-          
+
           // Check if the file already imports Suspense
           let updatedContent = content;
           if (!content.includes('import { Suspense }') && !content.includes('import {Suspense}')) {
@@ -295,7 +298,7 @@ function fixBuildIssues() {
               updatedContent = `import { Suspense } from 'react';\n${content}`;
             }
           }
-          
+
           fs.writeFileSync(page.path, updatedContent);
           console.log(`✅ Added Suspense import to ${page.name} page`);
         }
@@ -304,8 +307,40 @@ function fixBuildIssues() {
       }
     }
   }
-  
+
   // Add more build issue fixes here as needed
+}
+
+// Fix path alias resolution issues
+function fixPathAliasIssues() {
+  console.log('🔍 Checking for path alias resolution issues...');
+
+  // Create a temporary directory for path-fixed files
+  const tempDir = path.join(process.cwd(), '.temp-build');
+  if (!fs.existsSync(tempDir)) {
+    fs.mkdirSync(tempDir, { recursive: true });
+  }
+
+  // Create a symlink from src to node_modules/@
+  const nodeModulesDir = path.join(process.cwd(), 'node_modules');
+  const aliasDir = path.join(nodeModulesDir, '@');
+  const srcDir = path.join(process.cwd(), 'src');
+
+  if (!fs.existsSync(aliasDir)) {
+    try {
+      // Create @ directory if it doesn't exist
+      fs.mkdirSync(aliasDir, { recursive: true });
+
+      // Copy all files from src to node_modules/@
+      console.log('📂 Creating path alias resolution directory...');
+      runCommand(`cp -r ${srcDir}/* ${aliasDir}/`);
+      console.log('✅ Path alias resolution directory created');
+    } catch (error) {
+      console.error('❌ Error creating path alias directory:', error.message);
+    }
+  } else {
+    console.log('✅ Path alias resolution directory already exists');
+  }
 }
 
 // Main build process
@@ -313,7 +348,7 @@ async function build() {
   try {
     // Create environment file
     createEnvFile();
-    
+
     // Install dependencies
     installDependencies();
     
