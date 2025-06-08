@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max_old_space_size=4096 next build || npm run build:no-type-check",
+    "build": "node scripts/next-build.js",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "build:no-type-check": "NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max_old_space_size=4096 SKIP_TYPE_CHECK=true next build",
-    "setup:admin": "ts-node --project tsconfig.scripts.json scripts/setup-admin-user.ts"
+    "build:no-type-check": "cross-env NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max_old_space_size=4096 SKIP_TYPE_CHECK=true next build",
+    "setup:admin": "ts-node --project tsconfig.scripts.json scripts/setup-admin-user.ts",
+    "amplify:build": "node scripts/amplify-build.js",
+    "verify:build": "node scripts/verify-build.js"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
@@ -37,9 +39,10 @@
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.0.0",
     "@types/pg": "^8.10.10",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
     "autoprefixer": "^10.4.16",
+    "cross-env": "7.0.3",
     "dotenv": "^16.4.5",
     "eslint": "^8.56.0",
     "eslint-config-next": "14.0.0",

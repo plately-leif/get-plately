@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
 import Link from 'next/link';
 
-export default function UpdatePassword() {
+function UpdatePasswordForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -68,8 +68,7 @@ export default function UpdatePassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-BG1 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-4xl font-extrabold text-primary" style={{ color: '#0B3954', fontFamily: 'Inter, sans-serif' }}>
             Update Password
@@ -154,6 +153,35 @@ export default function UpdatePassword() {
           </Link>
         </div>
       </div>
+  );
+}
+
+// Loading fallback component
+function UpdatePasswordLoading() {
+  return (
+    <div className="max-w-md w-full space-y-8">
+      <div>
+        <h2 className="mt-6 text-center text-4xl font-extrabold text-primary" style={{ color: '#0B3954', fontFamily: 'Inter, sans-serif' }}>
+          Update Password
+        </h2>
+        <p className="mt-2 text-center text-base text-secondary-text" style={{ color: '#6B7280' }}>
+          Loading...
+        </p>
+      </div>
+      <div className="rounded-md bg-gray-50 p-4 border border-gray-200">
+        <p className="text-base font-medium text-gray-800">Please wait while we load your information...</p>
+      </div>
+    </div>
+  );
+}
+
+// Main component with Suspense boundary
+export default function UpdatePassword() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-BG1 py-12 px-4 sm:px-6 lg:px-8">
+      <Suspense fallback={<UpdatePasswordLoading />}>
+        <UpdatePasswordForm />
+      </Suspense>
     </div>
   );
 }

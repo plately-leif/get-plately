@@ -2,8 +2,6 @@
 const nextConfig = {
   // Experimental features
   experimental: {
-    // Disable CSR bailout errors
-    missingSuspenseWithCSRBailout: false,
     // Disable server components for better compatibility with Amplify
     serverComponents: false,
     // Improve compatibility with Amplify

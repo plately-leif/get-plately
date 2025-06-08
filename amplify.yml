@@ -6,24 +6,12 @@ frontend:
         # Print environment info for debugging (excluding secrets)
         - echo "Node version $(node -v)"
         - echo "NPM version $(npm -v)"
-        # Verify required environment variables
-        - |
-          if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ]; then
-            echo "Error: NEXT_PUBLIC_SUPABASE_URL is not set"
-            exit 1
-          fi
-        - |
-          if [ -z "$NEXT_PUBLIC_SUPABASE_ANON_KEY" ]; then
-            echo "Error: NEXT_PUBLIC_SUPABASE_ANON_KEY is not set"
-            exit 1
-          fi
-        # Install dependencies with explicit TypeScript types
-        - npm install --production=false
-        - npm install --save-dev @types/react@18.2.0 @types/react-dom@18.2.0
-        - node scripts/ensure-types.js
+        # Install dependencies with legacy peer deps to avoid compatibility issues
+        - npm ci --legacy-peer-deps --no-audit
     build:
       commands:
-        - npm run build
+        # Run our comprehensive Amplify build script
+        - npm run amplify:build
   artifacts:
     baseDirectory: .next
     files:
