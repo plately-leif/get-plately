@@ -6,10 +6,13 @@ frontend:
         # Print environment info for debugging
         - echo "Node version $(node -v)"
         - echo "NPM version $(npm -v)"
-        # Install critical dependencies first
-        - npm install --save tailwindcss@latest postcss@latest autoprefixer@latest @tailwindcss/typography --force
-        # Install dependencies with force flag to avoid conflicts
-        - npm install --force
+        # Fix npm cache issues
+        - npm cache clean --force
+        # Install dependencies with legacy peer deps to avoid conflicts
+        - npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+        # Setup tailwind explicitly
+        - chmod +x scripts/setup-tailwind.js
+        - node scripts/setup-tailwind.js
     build:
       commands:
         # Set environment variables for the build
@@ -17,15 +20,23 @@ frontend:
         - export SKIP_TYPE_CHECK=true
         - export NEXT_TELEMETRY_DISABLED=1
         - export NODE_OPTIONS=--max_old_space_size=4096
-        # Run our emergency build script only
-        - echo "Running emergency build script"
-        - node scripts/emergency-build.js
+        # Create .env.production file
+        - echo "Creating .env.production file"
+        - echo "NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}" >> .env.production
+        - echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}" >> .env.production
+        - echo "NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL}" >> .env.production
+        - echo "NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}" >> .env.production
+        - echo "PAYLOAD_SECRET=${PAYLOAD_SECRET}" >> .env.production
+        # Fix path aliases
+        - mkdir -p node_modules/@
+        - cp -r src/* node_modules/@/
+        # Run build with minimal options
+        - npx next build --no-lint
   artifacts:
     # This is the correct baseDirectory for Next.js 14 SSR applications
     baseDirectory: .next
     files:
       - '**/*'
-    # Required for SSR
     discard-paths: yes
   cache:
     paths:
